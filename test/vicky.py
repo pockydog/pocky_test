@@ -1,9 +1,19 @@
-from sqlalchemy import create_engine, MetaData, Table,Integer, String, DATETIME, Column
+from sqlalchemy import create_engine, MetaData, Table, Integer, String, DATETIME, Column
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask
+from flask import jsonify
 from datetime import datetime
 
 
+db = SQLAlchemy()
+app = Flask(__name__)
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:11111111@mysql_vicky_test/pockydb"
+db = SQLAlchemy(app)
+
 meta = MetaData()
-db = 'mysql+pymysql://root:11111111@localhost:8000/pockydb'
+db = 'mysql+pymysql://root:11111111@mysql_vicky_test/pockydb'
 user = Table('user', meta,
              Column('id', Integer(), primary_key=True),
              Column('name', String(100), nullable=False),
@@ -27,7 +37,7 @@ values = [
 ]
 # result = engine.connect().execute(info2, values)
 
-# query =user.update().values(dog_name='pocky').where(user.columns.name == 'vicky_chen')
+# query = user.update().values(dog_name='pocky').where(user.columns.name == 'vicky_chen')
 # result = engine.connect().execute(query)
 
 # query = user.delete().where(user.columns.dog_name == 'cogi')
@@ -35,5 +45,15 @@ values = [
 
 # query =user.select().order_by(user.columns.id).limit(10)
 # rows = engine.connect().execute(query).fetchall()
-# for row in rows:
-#     print(row.id, row.name)
+# # for row in rows:
+# #     print(row.id, row.name)
+query =user.select()
+rows = engine.connect().execute(query).fetchall()
+print(rows)
+for i in rows:
+
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0', port=5000)

@@ -2,4 +2,8 @@ requests==2.27.1
 BeautifulSoup4==4.10.0
 schema==0.7.5
 tqdm==4.62.3
+flask
+flask_sqlalchemy
+SQLAlchemy
+pymysql
 

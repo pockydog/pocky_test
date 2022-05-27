@@ -1,6 +1,5 @@
 version: "3.5"
 
-
 services:
   db:
     image: mysql:5.7
@@ -11,6 +10,8 @@ services:
       MYSQL_DATABASE: pockydb
     ports:
       - '8000:3306'
+    networks:
+      - vicky-network
 
   phpmyadmin:
     depends_on:
@@ -21,18 +22,31 @@ services:
     ports:
       - '8080:80'
     environment:
-      PMA_HOST: dbdox
+      PMA_HOST: db
+    networks:
+      - vicky-network
 
   python:
-    image: python:latest
-    container_name: test2_vicky
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: test_vicky
+    image: test_vicky
     env_file:
       - ./ dev.env
     ports:
-      - '8022:8020'
+      - '8022:5000'
     tty: true
     volumes:
-      - ./:/app:rw
+      - ./src:/app:rw
+    networks:
+      - vicky-network
+
+networks:
+  vicky-network:
+    external:
+     name: vicky-network
+
 
 
 

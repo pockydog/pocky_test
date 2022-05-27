@@ -1,6 +1,10 @@
 import os
-print(os.environ['MYSQL_USER'])
-#
+import sys
+sys.path.append('/app')
+
+print("\n".join(sys.path))
+
+
 # class Config:
 #     SQLALCHEMY_TRACK_MODIFICATIONS = False
 #     DB_NAME = 'pockydb'
@@ -14,11 +18,12 @@ print(os.environ['MYSQL_USER'])
 #             db=DB_NAME
 #         ),
 #     }
-#     print(SQLALCHEMY_BINDS)
-#
+
 #
 # if __name__ == '__main__':
 #     Config()
+
+
 
 
 
