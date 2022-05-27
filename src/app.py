@@ -8,14 +8,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:11111111@mysql_vic
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-
-
-
-
-
-
-
-
-
-
+def create_app():
+    return app
 
