@@ -1,8 +1,5 @@
-import sys
 from app import db
-
-from utils.models import Test, TestInfo
-
+from models.models import Test, TestInfo
 
 class UserHandler:
 

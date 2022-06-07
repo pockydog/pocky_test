@@ -1,18 +1,3 @@
-# from app import db
-#
-# class test(db.Model):
-#     __tablename__ = 'role'
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(100))
-#     # 初始化
-#     def __init__(self, name):
-#         self.name = name
-#     # 調用內容
-#     def __repr__ (self):
-#         return '<>'
-#
-#
-# db.create_all()
 
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
