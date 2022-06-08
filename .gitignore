@@ -14,6 +14,8 @@ src/student_test.py
 src/teacher_test.py
 src/core/bigbasket_executer.py
 src/core/daraz_parser.py
+src/start_get_bigbasket.py
+src/start_test_models.py
 
 
 
