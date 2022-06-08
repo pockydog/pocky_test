@@ -24,7 +24,7 @@ def create_info(payload):
     """
     建立關係人資料
     """
-    results = EmergencyHandler().add_emergency_info(
+    results = EmergencyHandler.add_emergency_info(
         name=payload['name'],
         student_id=payload['student_id'],
         relationship_to_client=payload['relationship_to_client'],
