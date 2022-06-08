@@ -7,16 +7,8 @@ class Config:
     MYSQL_HOST = os.environ['MYSQL_HOST']
     MYSQL_PORT = os.environ['MYSQL_PORT']
     SQLALCHEMY_BINDS = {
-        DB_NAME: f'mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{DB_NAME}'
+        DB_NAME: f'mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@mysql_vicky_test/{DB_NAME}'
     }
     SQLALCHEMY_DATABASE_URI = SQLALCHEMY_BINDS[DB_NAME]
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-
-
-
-
-
-
-

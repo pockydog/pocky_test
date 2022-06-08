@@ -1,21 +1,20 @@
 from app import app
-from core.emergency_hanlder import *
+from core.teacher_hanlder import *
 from flask import jsonify
 from utils.payload_utils import PayloadUtils
 from flask import request
-# from utils.school_schema import *
 
 
 @app.route('/teacher', methods=['GET'])
-def get_emergency():
+def get_info():
     """
     名稱查詢單筆資料
     """
     name = request.args.get('name')
-    if name is None or name not in EmergencyHandler.get_info():
-        results = EmergencyHandler.get_all_info()
+    if name is None or name not in TeacherHanlder.get_info():
+        results = TeacherHanlder.get_info()
     else:
-        results = EmergencyHandler.get_emergency_info(id=id)
+        results = TeacherHanlder.get_id_info(name=name)
     return jsonify(results=results)
 
 
@@ -23,25 +22,23 @@ def get_emergency():
 @PayloadUtils.inspect_schema()
 def create_info(payload):
     """
-    建立關係人資料
+    建立老師資料
     """
-    results = EmergencyHandler().add_emergency_info(
+    results = TeacherHanlder.add_info(
         name=payload['name'],
-        student_id=payload['student_id'],
-        relationship_to_client=payload['relationship_to_client'],
+        gender=payload['gender'],
         phone_number=payload['phone_number'],
 
     )
     return jsonify(results=results)
 
-
 @app.route('/teacher/delete', methods=['DELETE'])
 def delete_info():
     """
-    移除關係人資料
+    移除老師資料
     """
-    student_id = request.args.get('student_id')
-    results = EmergencyHandler.delete_emergency_info(student_id=student_id)
+    name = request.args.get('name')
+    results = TeacherHanlder().delete_info(name=name)
     return jsonify(results=results)
 
 
@@ -49,8 +46,12 @@ def delete_info():
 @PayloadUtils.inspect_schema()
 def update_info(payload):
     """
-    修改手機資料
+    修改資料
     """
     name = request.args.get('name')
-    results = EmergencyHandler.update_emergency_info(name=name, phone_number=payload['phone_number'])
+    gender = payload['gender']
+    phone_number = payload['phone_number']
+    results = TeacherHanlder.update_info(phone_number=phone_number,
+                                         gender=gender,
+                                         name=name)
     return jsonify(results=results)

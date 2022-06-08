@@ -1,13 +1,12 @@
 from app import create_app
-from controllers import emergency_routes
-import requests
+from controllers import score_record_routes
 
 app = create_app()
 
 
 if __name__ == "__main__":
 #     # user_routes.app.run(debug=True, host='0.0.0.0', port=5000)
-    emergency_routes.app.run(debug=True, host='0.0.0.0', port=5000)
+     score_record_routes.app.run(debug=True, host='0.0.0.0', port=5000)
 
 
 

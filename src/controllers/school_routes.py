@@ -11,8 +11,6 @@ def get_info():
     """
     取得所有學生資料
     """
-    # page = request.args.get('page', 1)
-    # per_page = request.args.get('per_page', 10)
     results = SchoolHandler.get_info()
     return jsonify(results=results)
 
@@ -66,5 +64,4 @@ def update_info(payload):
                                             phone_number=payload['phone_number'])
     except:
         return 'no data exists'
-
     return jsonify(results=results)

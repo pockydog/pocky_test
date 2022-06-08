@@ -64,10 +64,6 @@ class SchoolHandler:
         db.session.commit()
         return {'success': True}
 
-    # @classmethod
-    # def get_datetime_to_string(cls, datetime_):
-    #     results = datetime_.strftime("%Y-%m-%d %H:%M:%S")
-    #     return results
 
     @classmethod
     def update_info(cls, student_name, phone_number):

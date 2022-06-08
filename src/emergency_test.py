@@ -40,7 +40,6 @@ class GETINFO:
 
 
 if __name__ == '__main__':
-    # GETINFO.get_one_info()
-    # GETINFO.post_info()
+     GETINFO.post_info()
     # GETINFO.delete_info()
     # GETINFO.update_info()
