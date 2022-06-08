@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from config import Config
 
 
-
 app = Flask(__name__)
 # 設定資料庫位置，並建立 app
 config = Config()

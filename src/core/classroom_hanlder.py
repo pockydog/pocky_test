@@ -21,7 +21,6 @@ class ClassroomHanlder:
         result = {
             'name': info.name,
             'location': info.location,
-
         }
         return result
 
