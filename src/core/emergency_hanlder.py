@@ -1,4 +1,4 @@
-from models.school_models import *
+from models.school_models import EmergencyContact
 
 
 class EmergencyHandler:

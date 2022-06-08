@@ -1,10 +1,11 @@
-from models.school_models import *
+from models.school_models import Teacher
+from app import db
 
 
 class TeacherHanlder:
     @classmethod
     def get_info(cls):
-        user = c(Teacher.name, Teacher.gender, Teacher.phone_number).all()
+        user = db.session.query(Teacher.name, Teacher.gender, Teacher.phone_number).all()
         result_list = list()
         for name, gender, phone_number, in user:
             result = {

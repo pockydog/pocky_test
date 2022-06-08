@@ -1,5 +1,5 @@
 from app import app
-from core.emergency_hanlder import *
+from core.emergency_hanlder import EmergencyHandler
 from flask import jsonify
 from utils.payload_utils import PayloadUtils
 from flask import request

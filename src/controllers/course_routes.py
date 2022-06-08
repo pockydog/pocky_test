@@ -1,5 +1,5 @@
 from app import app
-from core.course_hanlder import *
+from core.course_hanlder import CourseHanlder
 from flask import jsonify
 from utils.payload_utils import PayloadUtils
 from flask import request

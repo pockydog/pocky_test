@@ -1,4 +1,4 @@
-from models.school_models import *
+from models.school_models import Classroom
 from app import db
 
 
