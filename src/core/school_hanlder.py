@@ -46,7 +46,8 @@ class SchoolHandler:
         }
         return results
 
-    def add_info(self, name, gender, grade, phone_number):
+    @classmethod
+    def add_info(cls, name, gender, grade, phone_number):
         student = Student(
             name=name,
             gender=gender,
@@ -63,7 +64,6 @@ class SchoolHandler:
         db.session.delete(student)
         db.session.commit()
         return {'success': True}
-
 
     @classmethod
     def update_info(cls, student_name, phone_number):

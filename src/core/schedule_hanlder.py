@@ -36,7 +36,6 @@ class ScheduleHanlder:
         db.session.commit()
         return {'success': True}
 
-
     @classmethod
     def del_info(cls, class_id):
         schedule = db.session.query(Schedule).filter(Schedule.class_id == class_id).first()

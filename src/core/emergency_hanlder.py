@@ -28,7 +28,8 @@ class EmergencyHandler:
         }
         return results
 
-    def add_emergency_info(self, name, student_id, relationship_to_client, phone_number):
+    @classmethod
+    def add_emergency_info(cls, name, student_id, relationship_to_client, phone_number):
         emergency = EmergencyContact(
             name=name,
             student_id=student_id,

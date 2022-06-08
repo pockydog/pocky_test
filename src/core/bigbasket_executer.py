@@ -6,7 +6,6 @@ from app import db
 from models.models import TestInfo
 
 
-
 class BigbasketExecuter:
     _CATEGORIES = {
         'fresh-vegetables': 'EKXvs4-ibWQBoWMBqHNrdV9saXN0kKJuZsOiY2OoNDg5fDEzNTOpYmF0Y2hfaWR4AKJhb8KidXLComFww6JsdM0BLqNkc2rNJrShb6pwb3B1bGFyaXR5pXNyX2lkAaJkc80GuKNtcmkB',

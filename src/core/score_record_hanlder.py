@@ -16,7 +16,6 @@ class ScoreRecordHandler:
             result_list.append(result)
         return result_list
 
-
     @classmethod
     def get_one_info(cls, schedule_id):
         info = db.session.query(ScoreRecord).filter(ScoreRecord.schedule_id == schedule_id).first()

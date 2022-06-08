@@ -32,6 +32,7 @@ def create_info(payload):
     )
     return jsonify(results=results)
 
+
 @app.route('/teacher/delete', methods=['DELETE'])
 def delete_info():
     """

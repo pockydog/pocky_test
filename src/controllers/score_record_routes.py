@@ -51,6 +51,6 @@ def update_info(payload):
     score = payload['score']
     try:
         results = ScoreRecordHandler.update_info(schedule_id=schedule_id, score=score)
-    except:
+    except KeyError:
         return 'no data exists'
     return jsonify(results=results)

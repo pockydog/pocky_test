@@ -4,6 +4,18 @@ test
 *.pyc
 __pycache__/
 .idea/
+src/class_test.py
+src/classroom_test.py
+src/course_test.py
+src/emergency_test.py
+src/schedule_test.py
+src/score_test.py
+src/student_test.py
+src/teacher_test.py
+src/core/bigbasket_executer.py
+src/core/daraz_parser.py
+
+
 
 
 
