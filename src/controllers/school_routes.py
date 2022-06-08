@@ -34,7 +34,7 @@ def create_info(payload):
     """
     建立學生資料
     """
-    results = SchoolHandler().add_info(
+    results = SchoolHandler.add_info(
         name=payload['name'],
         gender=payload['gender'],
         grade=payload['grade'],
@@ -49,7 +49,7 @@ def delete_info():
     移除學生資料
     """
     name = request.args.get('name')
-    results = SchoolHandler().delete_info(student_name=name)
+    results = SchoolHandler.delete_info(student_name=name)
     return jsonify(results=results)
 
 
@@ -62,6 +62,6 @@ def update_info(payload):
     try:
         results = SchoolHandler.update_info(student_name=request.args.get('name'),
                                             phone_number=payload['phone_number'])
-    except:
+    except KeyError:
         return 'no data exists'
     return jsonify(results=results)

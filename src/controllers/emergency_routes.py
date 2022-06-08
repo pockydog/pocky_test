@@ -14,7 +14,7 @@ def get_emergency():
     if name is None or name not in EmergencyHandler.get_info():
         results = EmergencyHandler.get_all_info()
     else:
-        results = EmergencyHandler.get_emergency_info(id=id)
+        results = EmergencyHandler.get_emergency_info(id=id_)
     return jsonify(results=results)
 
 

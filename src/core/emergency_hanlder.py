@@ -1,4 +1,5 @@
 from models.school_models import EmergencyContact
+from app import db
 
 
 class EmergencyHandler:
