@@ -16,15 +16,16 @@ def get_info():
 
 
 @app.route('/student', methods=['GET'])
-def get_student():
+@PayloadUtils.inspect_schema()
+def get_student(payload):
     """
     名稱查詢單筆資料
     """
-    name = request.args.get('name')
-    if name is None or name not in SchoolHandler.get_info():
+    name = payload.get('name')
+    if name is None:
         results = SchoolHandler.get_info()
     else:
-        results = SchoolHandler.get_student(name=name)
+        results = SchoolHandler.get_student(name_=name)
     return jsonify(results=results)
 
 
@@ -65,3 +66,13 @@ def update_info(payload):
     except KeyError:
         return 'no data exists'
     return jsonify(results=results)
+
+
+@app.route('/student/get/emergency', methods=['GET'])
+def get_emergency_info():
+    """
+    取得該學生的緊急聯絡人
+    """
+    results = SchoolHandler.get_emergency_info()
+    return jsonify(results=results)
+

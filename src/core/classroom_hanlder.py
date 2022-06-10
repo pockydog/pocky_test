@@ -17,12 +17,15 @@ class ClassroomHanlder:
 
     @classmethod
     def get_one_info(cls, name):
-        info = db.session.query(Classroom).filter(Classroom.name == name).first()
-        result = {
-            'name': info.name,
-            'location': info.location,
-        }
-        return result
+        info_ = db.session.query(Classroom).filter(Classroom.name == name).all()
+        info_list = list()
+        for info in info_:
+            result = {
+                'name': info.name,
+                'location': info.location,
+            }
+            info_list.append(result)
+            return info_list
 
     @classmethod
     def create_info(cls, name, location):
@@ -42,7 +45,7 @@ class ClassroomHanlder:
         return {'success': True}
 
     @classmethod
-    def update_info(cls, classroom_name, name ,location):
+    def update_info(cls, classroom_name, name, location):
         info = db.session.query(Classroom).filter(Classroom.name == classroom_name).first()
         if location:
             info.location = location

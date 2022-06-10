@@ -10,11 +10,11 @@ def get_student():
     """
     名稱查詢單筆資料
     """
-    name = request.args.get('name')
-    if name is None or name not in ScoreRecordHandler.get_info():
+    schedule_id = request.args.get('schedule_id')
+    if schedule_id is None or schedule_id not in ScoreRecordHandler.get_info():
         results = ScoreRecordHandler.get_info()
     else:
-        results = ScoreRecordHandler.get_one_info(name=name)
+        results = ScoreRecordHandler.get_one_info(schedule_id=schedule_id)
     return jsonify(results=results)
 
 

@@ -8,6 +8,9 @@ from flask import request
 @app.route('/course/new', methods=['POST'])
 @PayloadUtils.inspect_schema()
 def add_info(payload):
+    """
+    新增資料
+    """
     results = CourseHanlder.add_info(
         name=payload['name'],
         classroom_id=payload['classroom_id'],
@@ -19,14 +22,19 @@ def add_info(payload):
 
 @app.route('/course/info', methods=['GET'])
 def get_info():
+    """
+    名稱查詢單筆資料
+    """
     results = CourseHanlder.get_info()
     return jsonify(results=results)
 
 
 @app.route('/course/del', methods=['DELETE'])
 def del_info():
+    """
+    移除資料
+    """
     name = request.args.get('name')
     results = CourseHanlder.del_info(name=name)
     return jsonify(results=results)
-
 

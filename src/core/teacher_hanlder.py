@@ -19,7 +19,7 @@ class TeacherHanlder:
 
     @classmethod
     def get_id_info(cls, name):
-        user = db.session.query(Teacher).filter(Teacher.name == name).first()
+        user = Teacher.query.filter(Teacher.name == name).first()
         results = {
             'name': user.name,
             'gender': user.gender,
@@ -60,7 +60,6 @@ class TeacherHanlder:
             'phone_number': user.phone_number,
         }
         return results
-
 
 
 

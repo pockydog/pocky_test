@@ -17,14 +17,17 @@ class ClassHandler:
         return info_list
 
     @classmethod
-    def get_one_info(cls, name, teacher_id):
-        info = db.session.query(Class).filter(Class.name == name, Class.teacher_id == teacher_id).first()
-        results = {
-            'name': info.name,
-            'teacher_id': info.teacher_id,
-            'course_id': info.course_id,
-        }
-        return results
+    def get_one_info(cls, teacher_id):
+        info = db.session.query(Class).filter(Class.teacher_id.ilike('title%') == teacher_id).all()
+        info_list = list()
+        for id_ in info:
+            results = {
+                'teacher_id': id_.teacher_id,
+                'course_id': id_.course_id,
+            }
+            info_list.append(results)
+
+        return info_list
 
     @classmethod
     def add_info(cls, teacher_id, course_id):
@@ -56,3 +59,12 @@ class ClassHandler:
             'course_id': user.course_id,
         }
         return results
+
+    @classmethod
+    def get_emergency_info(cls, name):
+        emergency = db.session.query(Class).filter(Class.name == name).first()
+        results = {
+            'emergency_contact': emergency,
+        }
+        return results
+

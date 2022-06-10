@@ -10,12 +10,11 @@ def get_info():
     """
     名稱查詢單筆資料
     """
-    name = request.args.get('name')
     teacher_id = request.args.get('teacher_id')
-    if name is None or name not in ClassHandler.get_info():
+    if not teacher_id:
         results = ClassHandler.get_info()
     else:
-        results = ClassHandler.get_one_info(name=name, teacher_id=teacher_id)
+        results = ClassHandler.get_one_info(teacher_id=teacher_id)
     return jsonify(results=results)
 
 

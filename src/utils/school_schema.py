@@ -8,3 +8,5 @@ class Schemalist:
         'grade': int,
         'phone_number': Or(str, int),
     })
+
+

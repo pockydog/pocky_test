@@ -10,11 +10,11 @@ def get_emergency():
     """
     名稱查詢單筆資料
     """
-    name = request.args.get('name')
-    if name is None or name not in EmergencyHandler.get_info():
+    student_id = request.args.get('student_id')
+    if student_id is None or student_id not in EmergencyHandler.get_all_info():
         results = EmergencyHandler.get_all_info()
     else:
-        results = EmergencyHandler.get_emergency_info(id=id_)
+        results = EmergencyHandler.get_info(student_id=student_id)
     return jsonify(results=results)
 
 
@@ -34,12 +34,11 @@ def create_info(payload):
     return jsonify(results=results)
 
 
-@app.route('/emergency/delete', methods=['DELETE'])
-def delete_info():
+@app.route('/emergency/<int:student_id>', methods=['DELETE'])
+def delete_info(student_id):
     """
     移除關係人資料
     """
-    student_id = request.args.get('student_id')
     results = EmergencyHandler.delete_emergency_info(student_id=student_id)
     return jsonify(results=results)
 

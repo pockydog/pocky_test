@@ -1,4 +1,5 @@
 from models.school_models import Student
+from app import db
 
 
 class SchoolHandler:
@@ -6,9 +7,9 @@ class SchoolHandler:
     def get_info(cls):
         student_list = db.session.query(Student.id, Student.name, Student.gender, Student.grade, Student.phone_number, Student.create_datetime, Student.update_datetime).all()
         result_list = list()
-        for id, name, gender, grade, phone_number, create_datetime, update_datetime in student_list:
+        for id_, name, gender, grade, phone_number, create_datetime, update_datetime in student_list:
             result = {
-                'id': id,
+                'id': id_,
                 'name': name,
                 'gender': gender,
                 'grade': grade,
@@ -20,11 +21,11 @@ class SchoolHandler:
         return result_list
 
     @classmethod
-    def get_student(cls, name):
-        user = db.session.query(Student).filter(Student.name == name).first()
+    def get_student(cls, name_):
+        user = Student.query.filter(Student.name == name_).first()
         results = {
             'id': user.id,
-            'name': name,
+            'name': user.name,
             'gender': user.gender,
             'grade': user.grade,
             'phone_number': user.phone_number,

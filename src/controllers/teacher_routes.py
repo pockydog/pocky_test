@@ -39,7 +39,7 @@ def delete_info():
     移除老師資料
     """
     name = request.args.get('name')
-    results = TeacherHanlder().delete_info(name=name)
+    results = TeacherHanlder.delete_info(name=name)
     return jsonify(results=results)
 
 
