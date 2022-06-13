@@ -6,6 +6,8 @@ from random import choice
 class Test:
     @classmethod
     def add_info(cls, lunch_name):
+        if Lunch.query.filter_by(lunch_name=lunch_name).first():
+            return {'error': f'Duplicate name {lunch_name}'}
         test = Lunch(
             lunch_name=lunch_name,
         )
@@ -28,9 +30,4 @@ class Test:
         db.session.delete(info)
         db.session.commit()
         return {'success': True}
-
-
-
-
-
 

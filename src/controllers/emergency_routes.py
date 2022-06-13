@@ -10,6 +10,8 @@ def get_emergency():
     """
     名稱查詢單筆資料
     """
+    # page = request.args.get('page', 1)
+    # per_page = request.args.get('per_page', 10)
     student_id = request.args.get('student_id')
     if student_id is None or student_id not in EmergencyHandler.get_all_info():
         results = EmergencyHandler.get_all_info()

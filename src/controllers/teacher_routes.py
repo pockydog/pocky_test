@@ -10,6 +10,8 @@ def get_info():
     """
     名稱查詢單筆資料
     """
+    page = request.args.get('page', 1)
+    per_page = request.args.get('per_page', 10)
     name = request.args.get('name')
     if name is None or name not in TeacherHanlder.get_info():
         results = TeacherHanlder.get_info()

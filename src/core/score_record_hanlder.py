@@ -47,6 +47,8 @@ class ScoreRecordHandler:
         info = db.session.query(ScoreRecord).filter(ScoreRecord.schedule_id == schedule_id).first()
         if score:
             ScoreRecord.score = score
+        if schedule_id:
+            ScoreRecord.schedule_id = schedule_id
         db.session.add(info)
         db.session.commit()
         result = {
