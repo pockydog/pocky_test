@@ -1,5 +1,6 @@
 import os
 
+
 class Config:
     DB_NAME = os.environ['DB_NAME']
     MYSQL_USER = os.environ['MYSQL_USER']
