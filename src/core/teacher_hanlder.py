@@ -4,28 +4,22 @@ from app import db
 
 class TeacherHanlder:
     @classmethod
-    def get_info(cls):
-        user = db.session.query(Teacher.name, Teacher.gender, Teacher.phone_number).all()
+    def get_info(cls, name):
         result_list = list()
-        for name, gender, phone_number, in user:
+        if name:
+            user_ = db.session.query(Teacher).filter(Teacher.name == name).first()
+        else:
+            user_ = db.session.query(Teacher.name, Teacher.gender, Teacher.phone_number).all()
+        for user in user_:
             result = {
-                'name': name,
-                'gender': gender,
-                'phone_number': phone_number,
+                'name': user.name,
+                'gender': user.gender,
+                'phone_number': user.phone_number,
             }
             result_list.append(result)
-
         return result_list
 
-    @classmethod
-    def get_id_info(cls, name):
-        user = Teacher.query.filter(Teacher.name == name).first()
-        results = {
-            'name': user.name,
-            'gender': user.gender,
-            'phone_number': user.phone_number,
-        }
-        return results
+
 
     @classmethod
     def add_info(cls, name, gender, phone_number):

@@ -3,26 +3,22 @@ from core.teacher_hanlder import TeacherHanlder
 from flask import jsonify
 from utils.payload_utils import PayloadUtils
 from flask import request
+from utils.school_schema import Schema
 
 
 @app.route('/teacher', methods=['GET'])
-def get_info():
+def get_teacher_info():
     """
     名稱查詢單筆資料
     """
-    page = request.args.get('page', 1)
-    per_page = request.args.get('per_page', 10)
     name = request.args.get('name')
-    if name is None or name not in TeacherHanlder.get_info():
-        results = TeacherHanlder.get_info()
-    else:
-        results = TeacherHanlder.get_id_info(name=name)
+    results = TeacherHanlder.get_info(name=name)
     return jsonify(results=results)
 
 
-@app.route('/teacher/new', methods=['POST'])
-@PayloadUtils.inspect_schema()
-def create_info(payload):
+@app.route('/teacher', methods=['POST'])
+@PayloadUtils.inspect_schema(Schema.TEACHERINFO)
+def create_teacher_info(payload):
     """
     建立老師資料
     """
@@ -35,8 +31,8 @@ def create_info(payload):
     return jsonify(results=results)
 
 
-@app.route('/teacher/delete', methods=['DELETE'])
-def delete_info():
+@app.route('/teacher/del', methods=['DELETE'])
+def delete_teacher_info():
     """
     移除老師資料
     """
@@ -47,7 +43,7 @@ def delete_info():
 
 @app.route('/teacher/update', methods=['PUT'])
 @PayloadUtils.inspect_schema()
-def update_info(payload):
+def update_teacher_info(payload):
     """
     修改資料
     """

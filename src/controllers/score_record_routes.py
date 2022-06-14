@@ -6,21 +6,18 @@ from flask import request
 
 
 @app.route('/score', methods=['GET'])
-def get_student():
+def get_score_student():
     """
     名稱查詢單筆資料
     """
     schedule_id = request.args.get('schedule_id')
-    if schedule_id is None or schedule_id not in ScoreRecordHandler.get_info():
-        results = ScoreRecordHandler.get_info()
-    else:
-        results = ScoreRecordHandler.get_one_info(schedule_id=schedule_id)
+    results = ScoreRecordHandler.get_info(schedule_id=schedule_id)
     return jsonify(results=results)
 
 
 @app.route('/score/new', methods=['POST'])
 @PayloadUtils.inspect_schema()
-def add_info(payload):
+def add_score_info(payload):
     """
     建立資料
     """
@@ -32,7 +29,7 @@ def add_info(payload):
 
 
 @app.route('/score/del', methods=['DELETE'])
-def del_info():
+def del_score_info():
     """
     移除資料
     """
@@ -43,7 +40,7 @@ def del_info():
 
 @app.route('/score/update', methods=['PUT'])
 @PayloadUtils.inspect_schema()
-def update_info(payload):
+def update_score_info(payload):
     """
     修改資料
     """

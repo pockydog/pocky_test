@@ -10,43 +10,43 @@ def get_classroom_info():
     """
     名稱查詢資料
     """
-    # name = request.args.get('name')
-    result = ClassroomHanlder.get_info()
+    name = request.args.get('name')
+    result = ClassroomHanlder.get_info(name=name)
     return jsonify(result=result)
 
 
-# @app.route('/classroom/new', methods=['POST'])
-# @PayloadUtils.inspect_schema()
-# def create_info(payload):
-#     """
-#     新增資料
-#     """
-#     results = ClassroomHanlder.create_info(
-#         name=payload['name'],
-#         location=payload['location'],
-#     )
-#     return jsonify(results=results)
+@app.route('/classroom/add', methods=['POST'])
+@PayloadUtils.inspect_schema()
+def create_classroom_info(payload):
+    """
+    新增資料
+    """
+    results = ClassroomHanlder.create_info(
+        name=payload['name'],
+        location=payload['location'],
+    )
+    return jsonify(results=results)
 #
 #
-# @app.route('/classroom/del', methods=['DELETE'])
-# def del_info():
-#     """
-#     移除資料
-#     """
-#     name = request.args.get('name')
-#     results = ClassroomHanlder.del_info(name=name)
-#     return jsonify(results=results)
-#
-#
-# @app.route('/classroom/update', methods=['PUT'])
-# @PayloadUtils.inspect_schema()
-# def update_info(payload):
-#     """
-#     更新資料
-#     """
-#     classroom_name = request.args.get('name')
-#     name = payload['name']
-#     location = payload['location']
-#     results = ClassroomHanlder.update_info(classroom_name=classroom_name, name=name ,location=location)
-#     return jsonify(results=results)
-#
+@app.route('/classroom/del', methods=['DELETE'])
+def del_classroom_info():
+    """
+    移除資料
+    """
+    name = request.args.get('name')
+    results = ClassroomHanlder.del_info(name=name)
+    return jsonify(results=results)
+
+
+@app.route('/classroom/update', methods=['PUT'])
+def update_classroom_info():
+    """
+    更新資料
+    """
+    payload = request.get_json()
+    classroom_name = request.args.get('name')
+    name = payload['name']
+    location = payload['location']
+    results = ClassroomHanlder.update_info(classroom_name=classroom_name, name=name, location=location)
+    return jsonify(results=results)
+

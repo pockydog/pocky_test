@@ -4,15 +4,18 @@ from app import db
 
 class CourseHanlder:
     @classmethod
-    def get_info(cls):
-        info = db.session.query(Course.name, Course.classroom_id, Course.is_active, Course.open_time).all()
+    def get_info(cls, is_active):
         info_list = list()
-        for name, classroom_id, is_active, open_time in info:
+        if is_active:
+            info_ = db.session.query(Course.is_active == is_active).first()
+        else:
+            info_ = Course.query.all()
+        for info in info_:
             results = {
-                'name': name,
-                'classroom_id': classroom_id,
-                'is_active': is_active,
-                'open_time': open_time,
+                'name': info.name,
+                'classroom_id': info.classroom_id,
+                'is_active': info.is_active,
+                'open_time': info.open_time,
             }
             info_list.append(results)
         return info_list

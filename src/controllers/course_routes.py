@@ -5,9 +5,9 @@ from utils.payload_utils import PayloadUtils
 from flask import request
 
 
-@app.route('/course/new', methods=['POST'])
+@app.route('/course', methods=['POST'])
 @PayloadUtils.inspect_schema()
-def add_info(payload):
+def add_course_info(payload):
     """
     新增資料
     """
@@ -20,17 +20,18 @@ def add_info(payload):
     return jsonify(results=results)
 
 
-@app.route('/course/info', methods=['GET'])
-def get_info():
+@app.route('/course', methods=['GET'])
+def get_course_info():
     """
     名稱查詢單筆資料
     """
-    results = CourseHanlder.get_info()
+    is_active = request.args.get('is_active')
+    results = CourseHanlder.get_info(is_active=is_active)
     return jsonify(results=results)
 
 
 @app.route('/course/del', methods=['DELETE'])
-def del_info():
+def del_course_info():
     """
     移除資料
     """

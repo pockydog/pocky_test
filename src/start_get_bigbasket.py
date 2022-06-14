@@ -1,5 +1,4 @@
 
-# from app import create_app
 from core.school_hanlder import SchoolHandler
 
 # app = create_app()

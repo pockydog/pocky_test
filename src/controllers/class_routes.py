@@ -6,21 +6,18 @@ from flask import request
 
 
 @app.route('/class', methods=['GET'])
-def get_info():
+def get_class_info():
     """
     名稱查詢單筆資料
     """
     teacher_id = request.args.get('teacher_id')
-    if not teacher_id:
-        results = ClassHandler.get_info()
-    else:
-        results = ClassHandler.get_one_info(teacher_id=teacher_id)
+    results = ClassHandler.get_info(teacher_id=teacher_id)
     return jsonify(results=results)
 
 
 @app.route('/class/new', methods=['POST'])
 @PayloadUtils.inspect_schema()
-def add_info(payload):
+def add_class_info(payload):
     """
     建立資料
     """
@@ -32,18 +29,18 @@ def add_info(payload):
 
 
 @app.route('/class/del', methods=['DELETE'])
-def del_info():
+def del_class_info():
     """
     移除資料
     """
-    teacher_id = request.args.get('teacher_id')
-    results = ClassHandler.del_info(teacher_id=teacher_id)
+    id_ = request.args.get('id')
+    results = ClassHandler.del_info(id_=id_)
     return jsonify(results=results)
 
 
 @app.route('/class/update', methods=['PUT'])
 @PayloadUtils.inspect_schema()
-def update_info(payload):
+def update_class_info(payload):
     """
     修改資料
     """
