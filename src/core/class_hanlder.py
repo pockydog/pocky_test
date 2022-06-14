@@ -21,33 +21,39 @@ class ClassHandler:
 
     @classmethod
     def add_info(cls, teacher_id, course_id):
-        class_ = Class(
-            teacher_id=teacher_id,
-            course_id=course_id
-        )
-        db.session.add(class_)
-        db.session.commit()
+        try:
+            class_ = Class(
+                teacher_id=teacher_id,
+                course_id=course_id
+            )
+            db.session.add(class_)
+            db.session.commit()
+        except Exception:
+            return ''
         return {'success': True}
 
-    # @classmethod
-    # def del_info(cls, id_):
-    #     info = db.session.query(Class).filter(Class.id == id_).first()
-    #     db.session.delete(info)
-    #     db.session.commit()
-    #     return {'success': True}
-    #
-    # @classmethod
-    # def update_info(cls, teacher_id, course_id):
-    #     user = db.session.query(Class).filter(Class.course_id == course_id).first()
-    #     if teacher_id:
-    #         user.teacher_id = teacher_id
-    #     db.session.add(user)
-    #     db.session.commit()
-    #     results = {
-    #         'id': user.id,
-    #         'teacher_id': user.teacher_id,
-    #         'course_id': user.course_id,
-    #     }
-    #     return results
+    @classmethod
+    def del_info(cls, id_):
+        try:
+            info = db.session.query(Class).filter(Class.id == id_).first()
+            db.session.delete(info)
+            db.session.commit()
+        except Exception:
+            return ''
+        return {'success': True}
 
-
+    @classmethod
+    def update_info(cls, teacher_id, course_id):
+        user = db.session.query(Class).filter(Class.course_id == course_id).first()
+        try:
+            user.teacher_id = teacher_id
+            db.session.add(user)
+            db.session.commit()
+            results = {
+                'id': user.id,
+                'teacher_id': user.teacher_id,
+                'course_id': user.course_id,
+            }
+        except Exception:
+            return ''
+        return results

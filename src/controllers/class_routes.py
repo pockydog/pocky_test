@@ -15,7 +15,7 @@ def get_class_info():
     return jsonify(results=results)
 
 
-@app.route('/class/new', methods=['POST'])
+@app.route('/class', methods=['POST'])
 @PayloadUtils.inspect_schema()
 def add_class_info(payload):
     """

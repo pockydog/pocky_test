@@ -1,9 +1,11 @@
 from models.models import *
-from test.classroom_test import GetInfo
+from test.class_test import TestInfo
+from core.class_hanlder import ClassHandler
 
 if __name__ == '__main__':
-    GetInfo.update_info()
-    # db.create_all()
+    # ClassHandler.add_info()
+    TestInfo.update_info()
+
 
 
 

@@ -10,9 +10,9 @@ from bs4 import BeautifulSoup
 class DarazParser:
     _DOMAIN = 'https://www.daraz.pk'
     _PRODUCT_LIST = {
-        'RICE' : 'rice',
-        'COOKING_OIL' : 'cooking-oils',
-        'POTATOES' : 'buy-fresh-potatoes',
+        'RICE': 'rice',
+        'COOKING_OIL': 'cooking-oils',
+        'POTATOES': 'buy-fresh-potatoes',
             }
     _HEADERS = {
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36'
@@ -31,7 +31,6 @@ class DarazParser:
     def testt(cls):
         url = 'https://www.daraz.pk/products/dfresh-shakarkandi-sweet-potato-half-kg-i200784557.html'
         response = requests.get(url=url, headers=cls._HEADERS)
-        print(response.text)
         # soup = BeautifulSoup(response.text, 'html.parser')
         # type_list = soup.find_all('a', {'class': 'breadcrumb_item_anchor'})
         # print(type_list)
@@ -79,22 +78,4 @@ class DarazParser:
     #             }
     #             product_list.append(result)
     #     return product_list
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

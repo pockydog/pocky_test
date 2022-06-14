@@ -18,15 +18,15 @@ class ClassroomHanlder:
             result_list.append(result)
         return result_list
 
-    # @classmethod
-    # def create_info(cls, name, location):
-    #     info = Classroom(
-    #         name=name,
-    #         location=location,
-    #     )
-    #     db.session.add(info)
-    #     db.session.commit()
-    #     return {'success': True}
+    @classmethod
+    def create_info(cls, name, location):
+        info = Classroom(
+            name=name,
+            location=location,
+        )
+        db.session.add(info)
+        db.session.commit()
+        return {'success': True}
 
     @classmethod
     def del_info(cls, name):

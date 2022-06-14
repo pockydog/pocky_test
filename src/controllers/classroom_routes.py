@@ -15,7 +15,7 @@ def get_classroom_info():
     return jsonify(result=result)
 
 
-@app.route('/classroom/add', methods=['POST'])
+@app.route('/classroom', methods=['POST'])
 @PayloadUtils.inspect_schema()
 def create_classroom_info(payload):
     """
@@ -26,8 +26,8 @@ def create_classroom_info(payload):
         location=payload['location'],
     )
     return jsonify(results=results)
-#
-#
+
+
 @app.route('/classroom/del', methods=['DELETE'])
 def del_classroom_info():
     """
@@ -49,4 +49,3 @@ def update_classroom_info():
     location = payload['location']
     results = ClassroomHanlder.update_info(classroom_name=classroom_name, name=name, location=location)
     return jsonify(results=results)
-
