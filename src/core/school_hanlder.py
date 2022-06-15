@@ -8,14 +8,14 @@ class SchoolHandler:
         user_list = list()
         if name:
             users = db.session.query(Student).filter(Student.name == name).paginate(
-                per_page=int(page),
-                page=int(per_page),
+                page=int(page),
+                per_page=int(per_page),
                 error_out=False
             )
         else:
             users = db.session.query(Student).paginate(
-                per_page=int(page),
-                page=int(per_page),
+                page=int(page),
+                per_page=int(per_page),
                 error_out=False
             )
         for user in users:

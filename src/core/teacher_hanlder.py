@@ -10,8 +10,8 @@ class TeacherHanlder:
             user_ = db.session.query(Teacher).filter(Teacher.name == name).first()
         else:
             user_ = db.session.query(Teacher).paginate(
-                per_page=int(page),
-                page=int(per_page),
+                page=int(page),
+                per_page=int(per_page),
                 error_out=False
             )
         for user in user_:

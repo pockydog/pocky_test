@@ -10,15 +10,15 @@ class CourseHanlder:
         if is_active:
             info = info.filter(Course.is_active == is_active)\
                 .paginate(
-                per_page=int(page),
-                page=int(per_page),
+                page=int(page),
+                per_page=int(per_page),
                 error_out=False
             )
             info_ = info.items
         else:
             info_ = info.paginate(
-                per_page=int(page),
-                page=int(per_page),
+                page=int(page),
+                per_page=int(per_page),
                 error_out=False
             )
         for info in info_:

@@ -8,14 +8,14 @@ class ScoreRecordHandler:
         result_list = list()
         if schedule_id:
             info_ = db.session.query(ScoreRecord).filter(ScoreRecord.schedule_id == schedule_id).paginate(
-                per_page=int(page),
-                page=int(per_page),
+                page=int(page),
+                per_page=int(per_page),
                 error_out=False
             )
         else:
             info_ = db.session.query(ScoreRecord).paginate(
-                per_page=int(page),
-                page=int(per_page),
+                page=int(page),
+                per_page=int(per_page),
                 error_out=False
             )
         for info in info_:

@@ -12,7 +12,7 @@ def get_teacher_info(page=None):
     名稱查詢單筆資料
     """
     name = request.args.get('name')
-    per_page = request.args.get('per_page')
+    per_page = request.args.get('per_page', 2)
 
     results = TeacherHanlder.get_info(name=name, page=page, per_page=per_page)
     return jsonify(results=results)

@@ -5,4 +5,5 @@ test
 __pycache__/
 .idea/
 src/test
-
+src/ya.py
+src.yo.py

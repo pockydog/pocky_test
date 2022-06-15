@@ -7,7 +7,6 @@ RUN mkdir -p /${PRODUCT_NAME}
 WORKDIR /${PRODUCT_NAME}
 
 
-
 #COPY src /app
 COPY src .
 WORKDIR /app

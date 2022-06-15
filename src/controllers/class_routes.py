@@ -10,7 +10,7 @@ def get_class_info(page=None):
     """
     名稱查詢單筆資料
     """
-    per_page = request.args.get('per_page')
+    per_page = request.args.get('per_page', 2)
     teacher_id = request.args.get('teacher_id')
     results = ClassHandler.get_info(teacher_id=teacher_id, page=page, per_page=per_page)
     return jsonify(results=results)

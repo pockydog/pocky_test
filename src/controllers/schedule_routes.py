@@ -10,7 +10,7 @@ def get_info(page=None):
     """
     class_id查詢單筆資料
     """
-    per_page = request.args.get('per_page')
+    per_page = request.args.get('per_page', 2)
     class_id = request.args.get('class_id')
     results = ScheduleHanlder.get_info(class_id=class_id, page=page, per_page=per_page)
     return jsonify(results=results)

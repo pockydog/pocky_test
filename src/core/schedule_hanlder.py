@@ -8,14 +8,14 @@ class ScheduleHanlder:
         result_list = list()
         if class_id:
             schedule_ = db.session.query(Schedule).filter(Schedule.class_id == class_id).paginate(
-                per_page=int(page),
-                page=int(per_page),
+                page=int(page),
+                per_page=int(per_page),
                 error_out=False
             )
         else:
             schedule_ = db.session.query(Schedule).paginate(
-                per_page=int(page),
-                page=int(per_page),
+                page=int(page),
+                per_page=int(per_page),
                 error_out=False
             )
         for schedule in schedule_:

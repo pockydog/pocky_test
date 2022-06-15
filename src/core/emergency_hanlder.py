@@ -10,8 +10,8 @@ class EmergencyHandler:
             emergency_contact = db.session.query(EmergencyContact).filter(EmergencyContact.student_id == student_id).first()
         else:
             emergency_contact = db.session.query(EmergencyContact).paginate(
-                per_page=int(page),
-                page=int(per_page),
+                page=int(page),
+                per_page=int(per_page),
                 error_out=False
             )
         for emergency in emergency_contact:
