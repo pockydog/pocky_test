@@ -4,12 +4,20 @@ from app import db
 
 class ScheduleHanlder:
     @classmethod
-    def get_info(cls, class_id):
+    def get_info(cls, class_id, page, per_page):
         result_list = list()
         if class_id:
-            schedule_ = db.session.query(Schedule).filter(Schedule.class_id == class_id).all()
+            schedule_ = db.session.query(Schedule).filter(Schedule.class_id == class_id).paginate(
+                per_page=int(page),
+                page=int(per_page),
+                error_out=False
+            )
         else:
-            schedule_ = db.session.query(Schedule).all()
+            schedule_ = db.session.query(Schedule).paginate(
+                per_page=int(page),
+                page=int(per_page),
+                error_out=False
+            )
         for schedule in schedule_:
             result = {
                 'id': schedule.id,

@@ -5,13 +5,14 @@ from utils.payload_utils import PayloadUtils
 from flask import request
 
 
-@app.route('/score', methods=['GET'])
-def get_score_student():
+@app.route('/score/<int:page>', methods=['GET'])
+def get_score_student(page=None):
     """
     名稱查詢單筆資料
     """
     schedule_id = request.args.get('schedule_id')
-    results = ScoreRecordHandler.get_info(schedule_id=schedule_id)
+    per_page = request.args.get('per_page')
+    results = ScoreRecordHandler.get_info(schedule_id=schedule_id, page=page, per_page=per_page)
     return jsonify(results=results)
 
 

@@ -4,17 +4,29 @@ from app import db
 
 class CourseHanlder:
     @classmethod
-    def get_info(cls, is_active):
+    def get_info(cls, is_active, page, per_page):
         result_list = list()
+        info = db.session.query(Course)
         if is_active:
-            info_ = db.session.query(Course).filter(Course.is_active == is_active).all()
+            info = info.filter(Course.is_active == is_active)\
+                .paginate(
+                per_page=int(page),
+                page=int(per_page),
+                error_out=False
+            )
+            info_ = info.items
         else:
-            info_ = db.session.query(Course).all()
+            info_ = info.paginate(
+                per_page=int(page),
+                page=int(per_page),
+                error_out=False
+            )
         for info in info_:
             results = {
                 'name': info.name,
                 'classroom_id': info.classroom_id,
-                'open_datetime': info.open_time.strftime("%Y-%m-%d %H:%M:%S"),
+                'open_datetime': info.open_time.strftime("%Y-%m-%d %H:%M"),
+                'is_active': info.is_active,
             }
             result_list.append(results)
         return result_list

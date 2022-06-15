@@ -20,13 +20,14 @@ def add_course_info(payload):
     return jsonify(results=results)
 
 
-@app.route('/course', methods=['GET'])
-def get_course_info():
+@app.route('/course/<int:page>', methods=['GET'])
+def get_course_info(page=None):
     """
     名稱查詢單筆資料
     """
     is_active = request.args.get('is_active')
-    results = CourseHanlder.get_info(is_active=is_active)
+    per_page = request.args.get('per_page')
+    results = CourseHanlder.get_info(is_active=is_active, page=page, per_page=per_page)
     return jsonify(results=results)
 
 

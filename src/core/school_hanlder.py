@@ -4,12 +4,20 @@ from app import db
 
 class SchoolHandler:
     @classmethod
-    def get_info(cls, name):
+    def get_info(cls, name, page, per_page):
         user_list = list()
         if name:
-            users = db.session.query(Student).filter(Student.name == name).all()
+            users = db.session.query(Student).filter(Student.name == name).paginate(
+                per_page=int(page),
+                page=int(per_page),
+                error_out=False
+            )
         else:
-            users = db.session.query(Student).all()
+            users = db.session.query(Student).paginate(
+                per_page=int(page),
+                page=int(per_page),
+                error_out=False
+            )
         for user in users:
             results = {
                 'id': user.id,
@@ -17,8 +25,8 @@ class SchoolHandler:
                 'gender': user.gender,
                 'grade': user.grade,
                 'phone_number': user.phone_number,
-                'create_datetime': user.create_datetime.strftime("%Y-%m-%d %H:%M:%S"),
-                'update_datetime': user.update_datetime.strftime("%Y-%m-%d %H:%M:%S"),
+                'create_datetime': user.create_datetime.strftime("%Y-%m-%d %H:%M"),
+                'update_datetime': user.update_datetime.strftime("%Y-%m-%d %H:%M"),
             }
             user_list.append(results)
         return user_list

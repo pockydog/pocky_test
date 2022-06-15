@@ -6,13 +6,15 @@ from flask import request
 from utils.school_schema import Schema
 
 
-@app.route('/teacher', methods=['GET'])
-def get_teacher_info():
+@app.route('/teacher/<int:page>', methods=['GET'])
+def get_teacher_info(page=None):
     """
     名稱查詢單筆資料
     """
     name = request.args.get('name')
-    results = TeacherHanlder.get_info(name=name)
+    per_page = request.args.get('per_page')
+
+    results = TeacherHanlder.get_info(name=name, page=page, per_page=per_page)
     return jsonify(results=results)
 
 

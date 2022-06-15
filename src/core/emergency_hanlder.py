@@ -4,12 +4,16 @@ from app import db
 
 class EmergencyHandler:
     @classmethod
-    def get_info(cls, student_id):
+    def get_info(cls, student_id, page, per_page):
         result_list = list()
         if student_id:
             emergency_contact = db.session.query(EmergencyContact).filter(EmergencyContact.student_id == student_id).first()
         else:
-            emergency_contact = db.session.query(EmergencyContact).all()
+            emergency_contact = db.session.query(EmergencyContact).paginate(
+                per_page=int(page),
+                page=int(per_page),
+                error_out=False
+            )
         for emergency in emergency_contact:
             result = {
                 'name': emergency.name,

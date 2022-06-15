@@ -5,13 +5,14 @@ from utils.payload_utils import PayloadUtils
 from flask import request
 
 
-@app.route('/classroom', methods=['GET'])
-def get_classroom_info():
+@app.route('/classroom/<int:page>', methods=['GET'])
+def get_classroom_info(page=None):
     """
     名稱查詢資料
     """
+    per_page = request.args.get('per_page')
     name = request.args.get('name')
-    result = ClassroomHanlder.get_info(name=name)
+    result = ClassroomHanlder.get_info(name=name, per_page=per_page, page=page)
     return jsonify(result=result)
 
 

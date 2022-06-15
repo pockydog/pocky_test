@@ -4,12 +4,20 @@ from app import db
 
 class ClassroomHanlder:
     @classmethod
-    def get_info(cls, name):
+    def get_info(cls, name, page, per_page):
         result_list = list()
         if name:
-            info_ = db.session.query(Classroom).filter(Classroom.name == name).all()
+            info_ = db.session.query(Classroom).filter(Classroom.name == name).paginate(
+                per_page=int(page),
+                page=int(per_page),
+                error_out=False
+            )
         else:
-            info_ = db.session.query(Classroom).all()
+            info_ = db.session.query(Classroom).paginate(
+                per_page=int(page),
+                page=int(per_page),
+                error_out=False
+            )
         for info in info_:
             result = {
                 'name': info.name,

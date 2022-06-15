@@ -4,12 +4,16 @@ from app import db
 
 class TeacherHanlder:
     @classmethod
-    def get_info(cls, name):
+    def get_info(cls, name, page, per_page):
         result_list = list()
         if name:
             user_ = db.session.query(Teacher).filter(Teacher.name == name).first()
         else:
-            user_ = db.session.query(Teacher).all()
+            user_ = db.session.query(Teacher).paginate(
+                per_page=int(page),
+                page=int(per_page),
+                error_out=False
+            )
         for user in user_:
             result = {
                 'name': user.name,
