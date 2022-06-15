@@ -15,7 +15,7 @@ def get_score_student():
     return jsonify(results=results)
 
 
-@app.route('/score/new', methods=['POST'])
+@app.route('/score', methods=['POST'])
 @PayloadUtils.inspect_schema()
 def add_score_info(payload):
     """
@@ -28,7 +28,7 @@ def add_score_info(payload):
     return jsonify(results=results)
 
 
-@app.route('/score/del', methods=['DELETE'])
+@app.route('/score', methods=['DELETE'])
 def del_score_info():
     """
     移除資料
@@ -38,7 +38,7 @@ def del_score_info():
     return jsonify(results=results)
 
 
-@app.route('/score/update', methods=['PUT'])
+@app.route('/score', methods=['PUT'])
 @PayloadUtils.inspect_schema()
 def update_score_info(payload):
     """

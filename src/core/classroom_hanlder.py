@@ -9,7 +9,7 @@ class ClassroomHanlder:
         if name:
             info_ = db.session.query(Classroom).filter(Classroom.name == name).all()
         else:
-            info_ = Classroom.query.all()
+            info_ = db.session.query(Classroom).all()
         for info in info_:
             result = {
                 'name': info.name,
@@ -19,11 +19,13 @@ class ClassroomHanlder:
         return result_list
 
     @classmethod
-    def create_info(cls, name, location):
+    def add_info(cls, name, location):
         info = Classroom(
             name=name,
             location=location,
         )
+        if not info:
+            raise ValueError('Wrong format')
         db.session.add(info)
         db.session.commit()
         return {'success': True}
@@ -31,23 +33,24 @@ class ClassroomHanlder:
     @classmethod
     def del_info(cls, name):
         info = db.session.query(Classroom).filter(Classroom.name == name).first()
+        if not info:
+            raise ValueError('Name not exist')
         db.session.delete(info)
         db.session.commit()
         return {'success': True}
 
-
     @classmethod
     def update_info(cls, classroom_name, name, location):
         info = db.session.query(Classroom).filter(Classroom.name == classroom_name).first()
-        if location:
-            info.location = location
-        if name:
-            info.name = name
+        if not info:
+            raise ValueError('Name not exist')
+        info.location = location
+        info.name = name
         db.session.add(info)
-        db.session.commit()
         results = {
             'name': info.name,
             'location': info.location,
         }
+        db.session.commit()
         return results
 

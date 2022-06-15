@@ -9,7 +9,7 @@ class ClassHandler:
         if teacher_id:
             info_ = db.session.query(Class).filter(Class.teacher_id == teacher_id).all()
         else:
-            info_ = db.session.query(Class.id, Class.teacher_id, Class.course_id).all()
+            info_ = db.session.query(Class).all()
         for info in info_:
             results = {
                 'id': info.id,
@@ -21,39 +21,39 @@ class ClassHandler:
 
     @classmethod
     def add_info(cls, teacher_id, course_id):
-        try:
-            class_ = Class(
-                teacher_id=teacher_id,
-                course_id=course_id
-            )
-            db.session.add(class_)
-            db.session.commit()
-        except Exception:
-            return ''
+        if not teacher_id:
+            raise ValueError('Teacher id not exist')
+        if not course_id:
+            raise ValueError('Course id not exist')
+        class_ = Class(
+            teacher_id=teacher_id,
+            course_id=course_id
+        )
+        db.session.add(class_)
+        db.session.commit()
         return {'success': True}
 
     @classmethod
-    def del_info(cls, id_):
-        try:
-            info = db.session.query(Class).filter(Class.id == id_).first()
-            db.session.delete(info)
-            db.session.commit()
-        except Exception:
-            return ''
+    def del_info(cls, class_id):
+        info = db.session.query(Class).filter(Class.id == class_id).first()
+        if not info:
+            raise ValueError('Class id not exist')
+        db.session.delete(info)
+        db.session.commit()
         return {'success': True}
 
     @classmethod
     def update_info(cls, teacher_id, course_id):
         user = db.session.query(Class).filter(Class.course_id == course_id).first()
-        try:
-            user.teacher_id = teacher_id
-            db.session.add(user)
-            db.session.commit()
-            results = {
-                'id': user.id,
-                'teacher_id': user.teacher_id,
-                'course_id': user.course_id,
-            }
-        except Exception:
-            return ''
+        if not user:
+            raise ValueError('Course id not found')
+        user.teacher_id = teacher_id
+        db.session.add(user)
+        results = {
+            'id': user.id,
+            'teacher_id': user.teacher_id,
+            'course_id': user.course_id,
+        }
+        db.session.commit()
         return results
+

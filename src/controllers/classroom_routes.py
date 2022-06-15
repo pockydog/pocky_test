@@ -17,18 +17,18 @@ def get_classroom_info():
 
 @app.route('/classroom', methods=['POST'])
 @PayloadUtils.inspect_schema()
-def create_classroom_info(payload):
+def add_classroom_info(payload):
     """
     新增資料
     """
-    results = ClassroomHanlder.create_info(
+    results = ClassroomHanlder.add_info(
         name=payload['name'],
         location=payload['location'],
     )
     return jsonify(results=results)
 
 
-@app.route('/classroom/del', methods=['DELETE'])
+@app.route('/classroom', methods=['DELETE'])
 def del_classroom_info():
     """
     移除資料
@@ -38,7 +38,7 @@ def del_classroom_info():
     return jsonify(results=results)
 
 
-@app.route('/classroom/update', methods=['PUT'])
+@app.route('/classroom', methods=['PUT'])
 def update_classroom_info():
     """
     更新資料

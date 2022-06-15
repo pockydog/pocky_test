@@ -21,12 +21,11 @@ def create_emergency_info(payload):
     """
     建立關係人資料
     """
-    results = EmergencyHandler.add_emergency_info(
+    results = EmergencyHandler.add_info(
         name=payload['name'],
         student_id=payload['student_id'],
         relationship_to_client=payload['relationship_to_client'],
         phone_number=payload['phone_number'],
-
     )
     return jsonify(results=results)
 
@@ -36,11 +35,11 @@ def delete_emergency_info(student_id):
     """
     移除關係人資料
     """
-    results = EmergencyHandler.delete_emergency_info(student_id=student_id)
+    results = EmergencyHandler.delete_info(student_id=student_id)
     return jsonify(results=results)
 
 
-@app.route('/emergency/update', methods=['PUT'])
+@app.route('/emergency', methods=['PUT'])
 @PayloadUtils.inspect_schema()
 def update_emergency_info(payload):
     """
@@ -49,5 +48,6 @@ def update_emergency_info(payload):
     phone_number = payload['phone_number']
     name = request.args.get('name')
     relationship = payload['relationship_to_client']
-    results = EmergencyHandler.update_emergency_info(name=name, phone_number=phone_number, relationship=relationship)
+
+    results = EmergencyHandler.update_info(name=name, phone_number=phone_number, relationship=relationship)
     return jsonify(results=results)

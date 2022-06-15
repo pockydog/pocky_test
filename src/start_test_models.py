@@ -1,10 +1,10 @@
 from models.models import *
-from test.class_test import TestInfo
-from core.class_hanlder import ClassHandler
+from test.course_test import TestInfo
+from core.course_hanlder import CourseHanlder
 
 if __name__ == '__main__':
     # ClassHandler.add_info()
-    TestInfo.update_info()
+    TestInfo.del_info()
 
 
 

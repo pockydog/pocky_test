@@ -31,7 +31,7 @@ def create_student_info(payload):
     return jsonify(results=results)
 
 
-@app.route('/student/del', methods=['DELETE'])
+@app.route('/student', methods=['DELETE'])
 def delete_info():
     """
     移除學生資料
@@ -41,7 +41,7 @@ def delete_info():
     return jsonify(results=results)
 
 
-@app.route('/student/update', methods=['PUT'])
+@app.route('/student', methods=['PUT'])
 @PayloadUtils.inspect_schema()
 def update_info(payload):
     """

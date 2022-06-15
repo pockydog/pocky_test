@@ -30,7 +30,7 @@ def get_course_info():
     return jsonify(results=results)
 
 
-@app.route('/course/del', methods=['DELETE'])
+@app.route('/course', methods=['DELETE'])
 def del_course_info():
     """
     移除資料

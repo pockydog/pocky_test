@@ -15,7 +15,7 @@ def get_info():
     return jsonify(results=results)
 
 
-@app.route('/schedule/new', methods=['POST'])
+@app.route('/schedule', methods=['POST'])
 @PayloadUtils.inspect_schema()
 def add_schedule_info(payload):
     """
@@ -28,7 +28,7 @@ def add_schedule_info(payload):
     return jsonify(results=results)
 
 
-@app.route('/schedule/delete', methods=['DELETE'])
+@app.route('/schedule', methods=['DELETE'])
 def delete_schedule_info():
     """
     移除資料
@@ -38,7 +38,7 @@ def delete_schedule_info():
     return jsonify(results=results)
 
 
-@app.route('/schedule/update', methods=['PUT'])
+@app.route('/schedule', methods=['PUT'])
 @PayloadUtils.inspect_schema()
 def update_schedule_info(payload):
     """

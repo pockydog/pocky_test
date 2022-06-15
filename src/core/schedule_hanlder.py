@@ -5,11 +5,11 @@ from app import db
 class ScheduleHanlder:
     @classmethod
     def get_info(cls, class_id):
+        result_list = list()
         if class_id:
             schedule_ = db.session.query(Schedule).filter(Schedule.class_id == class_id).all()
         else:
-            schedule_ = db.session.query(Schedule.id, Schedule.student_id, Schedule.class_id).all()
-        result_list = list()
+            schedule_ = db.session.query(Schedule).all()
         for schedule in schedule_:
             result = {
                 'id': schedule.id,
@@ -21,6 +21,10 @@ class ScheduleHanlder:
 
     @classmethod
     def add_info(cls, student_id, class_id):
+        if not student_id:
+            raise ValueError('Student id not found')
+        if not class_id:
+            raise ValueError('Class id not found')
         schedule = Schedule(
             student_id=student_id,
             class_id=class_id,
@@ -32,6 +36,8 @@ class ScheduleHanlder:
     @classmethod
     def del_info(cls, class_id):
         schedule = db.session.query(Schedule).filter(Schedule.class_id == class_id).first()
+        if not schedule:
+            raise ValueError('Class id not found')
         db.session.delete(schedule)
         db.session.commit()
         return {'success': True}
@@ -39,14 +45,15 @@ class ScheduleHanlder:
     @classmethod
     def update_info(cls, student_id, class_id):
         schedule = db.session.query(Schedule).filter(Schedule.student_id == student_id).first()
-        if class_id:
-            Schedule.class_id = class_id
+        if not schedule:
+            raise ValueError('Student id not found')
+        Schedule.class_id = class_id
         db.session.add(schedule)
-        db.session.commit()
         results = {
             'id': schedule.id,
             'class_id': schedule.class_id,
             'student_id': schedule.student_id,
         }
+        db.session.commit()
         return results
 

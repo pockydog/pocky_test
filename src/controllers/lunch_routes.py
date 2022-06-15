@@ -5,10 +5,9 @@ from app import app
 
 
 @app.route('/add', methods=['POST'])
-@PayloadUtils.inspect_schema()
-def add_info(payload):
+def add_info():
     payload = request.get_json(force=True)
-    print(type(payload), payload)
+    # print(type(payload), payload)
     results = Test.add_info(
         lunch_name=payload['lunch_name']
     )

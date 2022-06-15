@@ -28,17 +28,17 @@ def add_class_info(payload):
     return jsonify(results=results)
 
 
-@app.route('/class/del', methods=['DELETE'])
+@app.route('/class', methods=['DELETE'])
 def del_class_info():
     """
     移除資料
     """
-    id_ = request.args.get('id')
-    results = ClassHandler.del_info(id_=id_)
+    class_id = request.args.get('id')
+    results = ClassHandler.del_info(class_id=class_id)
     return jsonify(results=results)
 
 
-@app.route('/class/update', methods=['PUT'])
+@app.route('/class', methods=['PUT'])
 @PayloadUtils.inspect_schema()
 def update_class_info(payload):
     """
