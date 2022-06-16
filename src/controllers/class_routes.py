@@ -1,8 +1,9 @@
+from flask import jsonify
+from flask import request
+
 from app import app
 from core.class_hanlder import ClassHandler
-from flask import jsonify
 from utils.payload_utils import PayloadUtils
-from flask import request
 from const import Page
 
 
@@ -13,7 +14,7 @@ def get_class_info(page=1):
     名稱查詢單筆資料
     """
     teacher_id = request.args.get('teacher_id')
-    per_page = request.args.get('per_page', Page.page, int)
+    per_page = request.args.get('per_page', Page.per_page, int)
     results, pager = ClassHandler.get_info(teacher_id=teacher_id, page=page, per_page=per_page)
     return jsonify(results=results, pager=pager)
 

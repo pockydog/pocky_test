@@ -1,8 +1,9 @@
+from flask import request
+from flask import jsonify
+
 from app import app
 from core.school_hanlder import SchoolHandler
-from flask import jsonify
 from utils.payload_utils import PayloadUtils
-from flask import request
 from utils.school_schema import Schema
 from const import Page
 

@@ -45,18 +45,18 @@ class CourseHanlder:
 
     @classmethod
     def del_info(cls, name):
-        info = db.session.query(Course).filter(Course.name == name).first()
-        if not info:
+        if not name:
             raise ValueError('Name not exist')
+        info = db.session.query(Course).filter(Course.name == name).first()
         db.session.delete(info)
         db.session.commit()
         return {'success': True}
 
     @classmethod
     def update_info(cls, name, classroom_id, is_active, open_time):
-        info = db.session.query(Course).filter(Course.name == name).first()
-        if not info:
+        if not name:
             raise ValueError('Name not exist')
+        info = db.session.query(Course).filter(Course.name == name).first()
         Course.classroom_id = classroom_id
         Course.is_active = is_active
         Course.open_time = open_time

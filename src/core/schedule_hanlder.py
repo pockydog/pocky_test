@@ -44,18 +44,18 @@ class ScheduleHanlder:
 
     @classmethod
     def del_info(cls, class_id):
-        schedule = db.session.query(Schedule).filter(Schedule.class_id == class_id).first()
-        if not schedule:
+        if not class_id:
             raise ValueError('Class id not found')
+        schedule = db.session.query(Schedule).filter(Schedule.class_id == class_id).first()
         db.session.delete(schedule)
         db.session.commit()
         return {'success': True}
 
     @classmethod
     def update_info(cls, student_id, class_id):
-        schedule = db.session.query(Schedule).filter(Schedule.student_id == student_id).first()
-        if not schedule:
+        if not student_id:
             raise ValueError('Student id not found')
+        schedule = db.session.query(Schedule).filter(Schedule.student_id == student_id).first()
         Schedule.class_id = class_id
         db.session.add(schedule)
         results = {

@@ -1,8 +1,9 @@
+from flask import request
+from flask import jsonify
+
 from app import app
 from core.teacher_hanlder import TeacherHanlder
-from flask import jsonify
 from utils.payload_utils import PayloadUtils
-from flask import request
 from utils.school_schema import Schema
 from const import Page
 
@@ -29,7 +30,6 @@ def create_teacher_info(payload):
         name=payload['name'],
         gender=payload['gender'],
         phone_number=payload['phone_number'],
-
     )
     return jsonify(results=results)
 

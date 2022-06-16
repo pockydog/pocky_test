@@ -1,9 +1,10 @@
+from flask import request
+from flask import jsonify
+
 from app import app
 from core.emergency_hanlder import EmergencyHandler
-from flask import jsonify
-from utils.payload_utils import PayloadUtils
-from flask import request
 from const import Page
+from utils.payload_utils import PayloadUtils
 
 
 @app.route('/emergency', methods=['GET'])

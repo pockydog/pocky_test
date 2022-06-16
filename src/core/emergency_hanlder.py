@@ -45,18 +45,18 @@ class EmergencyHandler:
 
     @classmethod
     def delete_info(cls, student_id):
-        emergency = db.session.query(EmergencyContact).filter(EmergencyContact.student_id == student_id).first()
         if not student_id:
             raise ValueError('Student id not exist')
+        emergency = db.session.query(EmergencyContact).filter(EmergencyContact.student_id == student_id).first()
         db.session.delete(emergency)
         db.session.commit()
         return {'success': True}
 
     @classmethod
     def update_info(cls, name, phone_number, relationship):
-        user = db.session.query(EmergencyContact).filter(EmergencyContact.name == name).first()
         if not name:
             raise ValueError('Name not exist')
+        user = db.session.query(EmergencyContact).filter(EmergencyContact.name == name).first()
         user.phone_number = phone_number
         user.relationship_to_client = relationship
         db.session.add(user)

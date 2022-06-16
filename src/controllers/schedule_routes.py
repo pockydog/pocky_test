@@ -1,8 +1,8 @@
+from flask import jsonify, request
+
 from app import app
 from core.schedule_hanlder import ScheduleHanlder
-from flask import jsonify
 from utils.payload_utils import PayloadUtils
-from flask import request
 from const import Page
 
 

@@ -42,18 +42,18 @@ class ScoreRecordHandler:
 
     @classmethod
     def del_info(cls, schedule_id):
-        info = db.session.query(ScoreRecord).filter(ScoreRecord.schedule_id == schedule_id).first()
-        if not info:
+        if not schedule_id:
             raise ValueError('Schedule id not exist')
+        info = db.session.query(ScoreRecord).filter(ScoreRecord.schedule_id == schedule_id).first()
         db.session.delete(info)
         db.session.commit()
         return {'success': True}
 
     @classmethod
     def update_info(cls, schedule_id, score):
-        info = db.session.query(ScoreRecord).filter(ScoreRecord.schedule_id == schedule_id).first()
-        if not info:
+        if not schedule_id:
             raise ValueError('Schedule id not exist')
+        info = db.session.query(ScoreRecord).filter(ScoreRecord.schedule_id == schedule_id).first()
         ScoreRecord.score = score
         ScoreRecord.schedule_id = schedule_id
         db.session.add(info)
@@ -64,6 +64,4 @@ class ScoreRecordHandler:
         db.session.commit()
 
         return result
-
-
 

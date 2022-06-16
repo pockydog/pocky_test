@@ -34,32 +34,32 @@ class SchoolHandler:
 
     @classmethod
     def add_info(cls, name, gender, grade, phone_number):
+        if not name and gender and grade and phone_number:
+            raise ValueError('Wrong format')
         student = Student(
             name=name,
             gender=gender,
             grade=grade,
             phone_number=phone_number,
         )
-        if not student:
-            raise ValueError('Wrong format')
         db.session.add(student)
         db.session.commit()
         return {'success': True}
 
     @classmethod
     def delete_info(cls, student_name):
-        student = db.session.query(Student).filter(Student.name == student_name).first()
-        if not student:
+        if not student_name:
             raise ValueError('Student name not exist')
+        student = db.session.query(Student).filter(Student.name == student_name).first()
         db.session.delete(student)
         db.session.commit()
         return {'success': True}
 
     @classmethod
     def update_info(cls, student_name, phone_number):
-        user = db.session.query(Student).filter(Student.name == student_name).first()
-        if not user:
+        if not student_name:
             raise ValueError('Student name not exist')
+        user = db.session.query(Student).filter(Student.name == student_name).first()
         user.phone_number = phone_number
         db.session.add(user)
         results = {

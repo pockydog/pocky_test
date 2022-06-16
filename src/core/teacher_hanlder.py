@@ -30,6 +30,8 @@ class TeacherHanlder:
 
     @classmethod
     def add_info(cls, name, gender, phone_number):
+        if not isinstance(name, str) and not isinstance(phone_number, str) and not isinstance(gender, int):
+            raise ValueError('Wrong format')
         user = Teacher(
             name=name,
             gender=gender,
@@ -41,18 +43,18 @@ class TeacherHanlder:
 
     @classmethod
     def delete_info(cls, name):
-        user = db.session.query(Teacher).filter(Teacher.name == name).first()
-        if not user:
+        if not name:
             raise ValueError('User not exist')
+        user = db.session.query(Teacher).filter(Teacher.name == name).first()
         db.session.delete(user)
         db.session.commit()
         return {'success': True}
 
     @classmethod
     def update_info(cls, name, phone_number, gender):
-        user = db.session.query(Teacher).filter(Teacher.name == name).first()
-        if not user:
+        if not name:
             raise ValueError('Teacher name not exist')
+        user = db.session.query(Teacher).filter(Teacher.name == name).first()
         user.phone_number = phone_number
         user.gender = gender
         db.session.add(user)
