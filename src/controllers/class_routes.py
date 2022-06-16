@@ -3,17 +3,19 @@ from core.class_hanlder import ClassHandler
 from flask import jsonify
 from utils.payload_utils import PayloadUtils
 from flask import request
+from const import Page
 
 
+@app.route('/class', methods=['GET'])
 @app.route('/class/<int:page>', methods=['GET'])
-def get_class_info(page=None):
+def get_class_info(page=1):
     """
     名稱查詢單筆資料
     """
-    per_page = request.args.get('per_page', 2)
     teacher_id = request.args.get('teacher_id')
-    results = ClassHandler.get_info(teacher_id=teacher_id, page=page, per_page=per_page)
-    return jsonify(results=results)
+    per_page = request.args.get('per_page', Page.page, int)
+    results, pager = ClassHandler.get_info(teacher_id=teacher_id, page=page, per_page=per_page)
+    return jsonify(results=results, pager=pager)
 
 
 @app.route('/class', methods=['POST'])

@@ -5,31 +5,32 @@ from app import db
 class SchoolHandler:
     @classmethod
     def get_info(cls, name, page, per_page):
+        conditions = list()
         user_list = list()
         if name:
-            users = db.session.query(Student).filter(Student.name == name).paginate(
-                page=int(page),
-                per_page=int(per_page),
-                error_out=False
-            )
-        else:
-            users = db.session.query(Student).paginate(
-                page=int(page),
-                per_page=int(per_page),
-                error_out=False
-            )
-        for user in users:
+            conditions.append(Student.name == name)
+        info_ = db.session.query(Student).filter(*conditions).paginate(
+            page=page,
+            per_page=per_page,
+            error_out=False
+        )
+        pagers = {
+            'page': info_.page,
+            'per_page': info_.per_page,
+            'total_page': info_.pages,
+        }
+        for info in info_:
             results = {
-                'id': user.id,
-                'name': user.name,
-                'gender': user.gender,
-                'grade': user.grade,
-                'phone_number': user.phone_number,
-                'create_datetime': user.create_datetime.strftime("%Y-%m-%d %H:%M"),
-                'update_datetime': user.update_datetime.strftime("%Y-%m-%d %H:%M"),
+                'id': info.id,
+                'name': info.name,
+                'gender': info.gender,
+                'grade': info.grade,
+                'phone_number': info.phone_number,
+                'create_datetime': info.create_datetime.strftime("%Y-%m-%d %H:%M"),
+                'update_datetime': info.update_datetime.strftime("%Y-%m-%d %H:%M"),
             }
             user_list.append(results)
-        return user_list
+        return user_list, pagers
 
     @classmethod
     def add_info(cls, name, gender, grade, phone_number):

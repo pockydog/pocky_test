@@ -3,6 +3,7 @@ from core.course_hanlder import CourseHanlder
 from flask import jsonify
 from utils.payload_utils import PayloadUtils
 from flask import request
+from const import Page
 
 
 @app.route('/course', methods=['POST'])
@@ -20,15 +21,16 @@ def add_course_info(payload):
     return jsonify(results=results)
 
 
+@app.route('/course', methods=['GET'])
 @app.route('/course/<int:page>', methods=['GET'])
-def get_course_info(page=None):
+def get_course_info(page=1):
     """
     名稱查詢單筆資料
     """
     is_active = request.args.get('is_active')
-    per_page = request.args.get('per_page', 4)
-    results = CourseHanlder.get_info(is_active=is_active, page=page, per_page=per_page)
-    return jsonify(results=results)
+    per_page = request.args.get('per_page', Page.page, int)
+    results, pagers = CourseHanlder.get_info(is_active=is_active, page=page, per_page=per_page)
+    return jsonify(results=results, pager=pagers)
 
 
 @app.route('/course', methods=['DELETE'])

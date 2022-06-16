@@ -3,17 +3,19 @@ from core.emergency_hanlder import EmergencyHandler
 from flask import jsonify
 from utils.payload_utils import PayloadUtils
 from flask import request
+from const import Page
 
 
+@app.route('/emergency', methods=['GET'])
 @app.route('/emergency/<int:page>', methods=['GET'])
-def get_emergency_info(page=None):
+def get_emergency_info(page=1):
     """
     名稱查詢單筆資料
     """
-    per_page = request.args.get('per_page', 2)
     student_id = request.args.get('student_id')
-    results = EmergencyHandler.get_info(student_id=student_id, page=page, per_page=per_page)
-    return jsonify(results=results)
+    per_page = request.args.get('per_page', Page.page, int)
+    results, pagers = EmergencyHandler.get_info(student_id=student_id, page=page, per_page=per_page)
+    return jsonify(results=results, pagers=pagers)
 
 
 @app.route('/emergency', methods=['POST'])

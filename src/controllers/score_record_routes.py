@@ -3,17 +3,19 @@ from core.score_record_hanlder import ScoreRecordHandler
 from flask import jsonify
 from utils.payload_utils import PayloadUtils
 from flask import request
+from const import Page
 
 
+@app.route('/score', methods=['GET'])
 @app.route('/score/<int:page>', methods=['GET'])
-def get_score_student(page=None):
+def get_score_student(page=1):
     """
     名稱查詢單筆資料
     """
     schedule_id = request.args.get('schedule_id')
-    per_page = request.args.get('per_page', 1)
-    results = ScoreRecordHandler.get_info(schedule_id=schedule_id, page=page, per_page=per_page)
-    return jsonify(results=results)
+    per_page = request.args.get('per_page', Page.page, int)
+    results, pagers = ScoreRecordHandler.get_info(schedule_id=schedule_id, page=page, per_page=per_page)
+    return jsonify(results=results, pagers=pagers)
 
 
 @app.route('/score', methods=['POST'])

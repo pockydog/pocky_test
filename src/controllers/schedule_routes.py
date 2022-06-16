@@ -3,17 +3,19 @@ from core.schedule_hanlder import ScheduleHanlder
 from flask import jsonify
 from utils.payload_utils import PayloadUtils
 from flask import request
+from const import Page
 
 
+@app.route('/schedule', methods =['GET'])
 @app.route('/schedule/<int:page>', methods=['GET'])
-def get_info(page=None):
+def get_info(page=1):
     """
     class_id查詢單筆資料
     """
-    per_page = request.args.get('per_page', 2)
+    per_page = request.args.get('per_page', Page.page, int)
     class_id = request.args.get('class_id')
-    results = ScheduleHanlder.get_info(class_id=class_id, page=page, per_page=per_page)
-    return jsonify(results=results)
+    results, pagers = ScheduleHanlder.get_info(class_id=class_id, page=page, per_page=per_page)
+    return jsonify(results=results, pagers=pagers)
 
 
 @app.route('/schedule', methods=['POST'])

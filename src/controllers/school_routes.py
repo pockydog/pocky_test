@@ -4,17 +4,19 @@ from flask import jsonify
 from utils.payload_utils import PayloadUtils
 from flask import request
 from utils.school_schema import Schema
+from const import Page
 
 
+@app.route('/student', methods=['GET'])
 @app.route('/student/<int:page>', methods=['GET'])
-def get_student_info(page=None):
+def get_student_info(page=1):
     """
     名稱查詢單筆資料
     """
     name = request.args.get('name')
-    per_page = request.args.get('per_page', 2)
-    results = SchoolHandler.get_info(name=name, page=page, per_page=per_page)
-    return jsonify(results=results)
+    per_page = request.args.get('per_page', Page.page, int)
+    results, pagers = SchoolHandler.get_info(name=name, page=page, per_page=per_page)
+    return jsonify(results=results, pagers=pagers)
 
 
 @app.route('/student', methods=['POST'])

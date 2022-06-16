@@ -5,23 +5,28 @@ from app import db
 class TeacherHanlder:
     @classmethod
     def get_info(cls, name, page, per_page):
+        conditions = list()
         result_list = list()
         if name:
-            user_ = db.session.query(Teacher).filter(Teacher.name == name).first()
-        else:
-            user_ = db.session.query(Teacher).paginate(
-                page=int(page),
-                per_page=int(per_page),
-                error_out=False
-            )
-        for user in user_:
+            conditions.append(Teacher.name == name)
+        info_ = db.session.query(Teacher).filter(*conditions).paginate(
+            page=page,
+            per_page=per_page,
+            error_out=False
+        )
+        pagers = {
+            'page': info_.page,
+            'per_page': info_.per_page,
+            'total_page': info_.pages,
+        }
+        for info in info_:
             result = {
-                'name': user.name,
-                'gender': user.gender,
-                'phone_number': user.phone_number,
+                'name': info.name,
+                'gender': info.gender,
+                'phone_number': info.phone_number,
             }
             result_list.append(result)
-        return result_list
+        return result_list, pagers
 
     @classmethod
     def add_info(cls, name, gender, phone_number):

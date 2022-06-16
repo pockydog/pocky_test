@@ -3,25 +3,24 @@ from app import db
 
 
 class CourseHanlder:
+
     @classmethod
     def get_info(cls, is_active, page, per_page):
+        conditions = list()
         result_list = list()
-        info = db.session.query(Course)
         if is_active:
-            info = info.filter(Course.is_active == is_active)\
-                .paginate(
-                page=int(page),
-                per_page=int(per_page),
-                error_out=False
-            )
-            info_ = info.items
-        else:
-            info_ = info.paginate(
-                page=int(page),
-                per_page=int(per_page),
-                error_out=False
-            )
-        for info in info_:
+            conditions.append(Course.is_active == is_active)
+        info_ = db.session.query(Course).filter(*conditions).paginate(
+            page=page,
+            per_page=per_page,
+            error_out=False
+        )
+        pager = {
+            'page': info_.page,
+            'per_page': info_.per_page,
+            'total_page': info_.pages,
+        }
+        for info in info_.items:
             results = {
                 'name': info.name,
                 'classroom_id': info.classroom_id,
@@ -29,7 +28,7 @@ class CourseHanlder:
                 'is_active': info.is_active,
             }
             result_list.append(results)
-        return result_list
+        return result_list, pager
 
     @classmethod
     def add_info(cls, name, classroom_id, is_active, open_time):

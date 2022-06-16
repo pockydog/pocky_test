@@ -1,15 +1,9 @@
 from models.models import *
-from test.course_test import TestInfo
+from test.emergency_test import GETINFO
 
 
-from core.course_hanlder import CourseHanlder
-
-if __name__ == '__main__':
-    # ClassHandler.add_info()
-    TestInfo.get_info()
-    # CourseHanlder.get_info()
-
-
+if __name__ in '__main__':
+    GETINFO.get_info()
 
 
 

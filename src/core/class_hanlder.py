@@ -5,27 +5,28 @@ from app import db
 class ClassHandler:
     @classmethod
     def get_info(cls, teacher_id, page, per_page):
+        conditions = list()
         info_list = list()
         if teacher_id:
-            info_ = db.session.query(Class).filter(Class.teacher_id == teacher_id).paginate(
-                page=int(page),
-                per_page=int(per_page),
-                error_out=False
-            )
-        else:
-            info_ = db.session.query(Class).paginate(
-                page=int(page),
-                per_page=int(per_page),
-                error_out=False
-            )
-        for info in info_:
+            conditions.append(Class.teacher_id == teacher_id)
+        info = db.session.query(Class).filter(*conditions).paginate(
+            page=page,
+            per_page=per_page,
+            error_out=False
+        )
+        pager = {
+            'page': info.page,
+            'per_page': info.per_page,
+            'total_page': info.pages,
+        }
+        for info in info.items:
             results = {
                 'id': info.id,
                 'teacher_id': info.teacher_id,
                 'course_id': info.course_id,
             }
             info_list.append(results)
-        return info_list
+        return info_list, pager
 
     @classmethod
     def add_info(cls, teacher_id, course_id):

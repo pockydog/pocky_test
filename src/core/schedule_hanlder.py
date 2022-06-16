@@ -6,26 +6,27 @@ class ScheduleHanlder:
     @classmethod
     def get_info(cls, class_id, page, per_page):
         result_list = list()
+        conditions = list()
         if class_id:
-            schedule_ = db.session.query(Schedule).filter(Schedule.class_id == class_id).paginate(
-                page=int(page),
-                per_page=int(per_page),
-                error_out=False
-            )
-        else:
-            schedule_ = db.session.query(Schedule).paginate(
-                page=int(page),
-                per_page=int(per_page),
-                error_out=False
-            )
-        for schedule in schedule_:
+            conditions.append(Schedule.class_id == class_id)
+        info_ = db.session.query(Schedule).filter(*conditions).paginate(
+            page=page,
+            per_page=per_page,
+            error_out=False
+        )
+        pagers = {
+            'page': info_.page,
+            'per_page': info_.per_page,
+            'total_page': info_.pages,
+        }
+        for info in info_.items:
             result = {
-                'id': schedule.id,
-                'student_id': schedule.student_id,
-                'class_id': schedule.class_id,
+                'id': info.id,
+                'student_id': info.student_id,
+                'class_id': info.class_id,
             }
             result_list.append(result)
-        return result_list
+        return result_list, pagers
 
     @classmethod
     def add_info(cls, student_id, class_id):
