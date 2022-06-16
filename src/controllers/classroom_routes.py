@@ -35,8 +35,8 @@ def del_classroom_info():
     """
     移除資料
     """
-    name = request.args.get('name')
-    results = ClassroomHanlder.del_info(name=name)
+    id_ = request.args.get('id')
+    results = ClassroomHanlder.del_info(id_=id_)
     return jsonify(results=results)
 
 
@@ -46,8 +46,8 @@ def update_classroom_info():
     更新資料
     """
     payload = request.get_json()
-    classroom_name = request.args.get('name')
+    classroom_id = request.args.get('id')
     name = payload['name']
     location = payload['location']
-    results = ClassroomHanlder.update_info(classroom_name=classroom_name, name=name, location=location)
+    results = ClassroomHanlder.update_info(classroom_id=classroom_id, name=name, location=location)
     return jsonify(results=results)
