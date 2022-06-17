@@ -6,7 +6,7 @@ from utils.payload_utils import PayloadUtils
 from const import Page
 
 
-@app.route('/schedule', methods =['GET'])
+@app.route('/schedule', methods=['GET'])
 @app.route('/schedule/<int:page>', methods=['GET'])
 def get_info(page=1):
     """

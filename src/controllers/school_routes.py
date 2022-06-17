@@ -51,13 +51,6 @@ def update_info(payload):
     """
     修改學生資料
     """
-    try:
-        results = SchoolHandler.update_info(student_name=request.args.get('name'),
-                                            phone_number=payload['phone_number'])
-    except KeyError:
-        return 'no data exists'
+    results = SchoolHandler.update_info(student_name=request.args.get('name'),
+                                        phone_number=payload['phone_number'])
     return jsonify(results=results)
-
-
-
-

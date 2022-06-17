@@ -50,8 +50,5 @@ def update_score_info(payload):
     """
     schedule_id = request.args.get('schedule_id')
     score = payload['score']
-    try:
-        results = ScoreRecordHandler.update_info(schedule_id=schedule_id, score=score)
-    except KeyError:
-        return 'no data exists'
+    results = ScoreRecordHandler.update_info(schedule_id=schedule_id, score=score)
     return jsonify(results=results)

@@ -55,3 +55,5 @@ def update_emergency_info(payload):
 
     results = EmergencyHandler.update_info(name=name, phone_number=phone_number, relationship=relationship)
     return jsonify(results=results)
+
+
