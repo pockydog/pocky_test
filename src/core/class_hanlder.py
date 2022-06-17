@@ -45,8 +45,10 @@ class ClassHandler:
     @classmethod
     def del_info(cls, class_id):
         if not class_id:
-            raise ValueError('Class id not exist')
+            raise ValueError('data not found')
         info = db.session.query(Class).filter(Class.id == class_id).first()
+        if not info:
+            raise ValueError('Class id not exist')
         db.session.delete(info)
         db.session.commit()
         return {'success': True}
@@ -54,8 +56,10 @@ class ClassHandler:
     @classmethod
     def update_info(cls, teacher_id, course_id):
         if not course_id:
-            raise ValueError('Course id not found')
+            raise ValueError('data not found')
         user = db.session.query(Class).filter(Class.course_id == course_id).first()
+        if not user:
+            raise ValueError('Course id not found')
         user.teacher_id = teacher_id
         db.session.add(user)
         results = {

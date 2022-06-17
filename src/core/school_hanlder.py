@@ -49,8 +49,10 @@ class SchoolHandler:
     @classmethod
     def delete_info(cls, student_name):
         if not student_name:
-            raise ValueError('Student name not exist')
+            raise ValueError('data not found')
         student = db.session.query(Student).filter(Student.name == student_name).first()
+        if not student:
+            raise ValueError('Student name not exist')
         db.session.delete(student)
         db.session.commit()
         return {'success': True}
@@ -58,8 +60,10 @@ class SchoolHandler:
     @classmethod
     def update_info(cls, student_name, phone_number):
         if not student_name:
-            raise ValueError('Student name not exist')
+            raise ValueError('data not found')
         user = db.session.query(Student).filter(Student.name == student_name).first()
+        if not user:
+            raise ValueError('Student name not exist')
         user.phone_number = phone_number
         db.session.add(user)
         results = {
