@@ -1,4 +1,5 @@
-from models.school_models import Class
+from models.school_models import Class, Teacher, Course
+
 from app import db
 
 
@@ -29,20 +30,6 @@ class ClassHandler:
         return info_list, pager
 
     @classmethod
-    def add_info(cls, teacher_id, course_id):
-        if not teacher_id:
-            raise ValueError('Teacher id not exist')
-        if not course_id:
-            raise ValueError('Course id not exist')
-        class_ = Class(
-            teacher_id=teacher_id,
-            course_id=course_id
-        )
-        db.session.add(class_)
-        db.session.commit()
-        return {'success': True}
-
-    @classmethod
     def del_info(cls, class_id):
         if not class_id:
             raise ValueError('Class id not exist')
@@ -68,5 +55,31 @@ class ClassHandler:
             'course_id': course.course_id,
         }
         db.session.commit()
+        return results
+
+    @classmethod
+    def add_info(cls, teacher_id, course_id):
+        if not isinstance(teacher_id, int) and not isinstance(course_id, int):
+            raise ValueError('wrong format')
+        teacher = db.session.query(Teacher).filter(Teacher.id == teacher_id).first()
+        course = db.session.query(Course).filter(Course.id == course_id).first()
+        if not teacher:
+            raise ValueError('teacher not found')
+        if not course:
+            raise ValueError('course not found')
+        class_ = Class(
+            teacher_id=teacher_id,
+            course_id=course_id,
+        )
+        if not class_:
+            raise ValueError('info not found')
+        db.session.add(class_)
+        db.session.commit()
+        results = {
+            'id': class_.id,
+            'teacher_id': class_.teacher_id,
+            'course_id': class_.course_id,
+            'create_datetime': class_.create_datetime.strftime("%Y-%m-%d %H:%M")
+        }
         return results
 

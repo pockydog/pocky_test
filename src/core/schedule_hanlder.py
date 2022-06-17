@@ -1,4 +1,4 @@
-from models.school_models import Schedule
+from models.school_models import Schedule, Student, Class
 from app import db
 
 
@@ -30,6 +30,8 @@ class ScheduleHanlder:
 
     @classmethod
     def add_info(cls, student_id, class_id):
+        student_id = db.session.query(Student.id == student_id).first()
+        class_id = db.session.query(Class.id == class_id).first()
         if not student_id:
             raise ValueError('Student id not found')
         if not class_id:

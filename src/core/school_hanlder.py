@@ -34,7 +34,7 @@ class SchoolHandler:
 
     @classmethod
     def add_info(cls, name, gender, grade, phone_number):
-        if not name and gender and grade and phone_number:
+        if not isinstance(name, str) and isinstance(gender, int) and isinstance(grade, int) and isinstance(phone_number, int):
             raise ValueError('Wrong format')
         student = Student(
             name=name,

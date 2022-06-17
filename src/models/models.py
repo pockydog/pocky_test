@@ -7,3 +7,11 @@ class Lunch(db.Model):
     lunch_name = db.Column(db.String(90), nullable=True, unique=True)
 
 
+class test(db.Model):
+    __tablename__ = 'test'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    lunch_name = db.Column(db.String(90), nullable=True, unique=True)
+
+
+
+

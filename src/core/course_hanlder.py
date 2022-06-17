@@ -1,9 +1,8 @@
-from models.school_models import Course
+from models.school_models import Course, Classroom
 from app import db
 
 
 class CourseHanlder:
-
     @classmethod
     def get_info(cls, is_active, page, per_page):
         conditions = list()
@@ -32,6 +31,7 @@ class CourseHanlder:
 
     @classmethod
     def add_info(cls, name, classroom_id, is_active, open_time):
+        classroom_id = db.session.query(Classroom).filter(Classroom.id == classroom_id).first()
         if not classroom_id:
             raise ValueError('Classroom id not exist')
         info = Course(name=name,

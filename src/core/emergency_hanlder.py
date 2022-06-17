@@ -1,4 +1,4 @@
-from models.school_models import EmergencyContact
+from models.school_models import EmergencyContact, Student
 from app import db
 
 
@@ -31,6 +31,7 @@ class EmergencyHandler:
 
     @classmethod
     def add_info(cls, name, student_id, relationship_to_client, phone_number):
+        student_id = db.session.query(Student).filter(Student.id == student_id).first()
         if not student_id:
             raise ValueError('Student id not exist')
         emergency = EmergencyContact(

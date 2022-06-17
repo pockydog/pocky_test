@@ -1,4 +1,4 @@
-from models.school_models import ScoreRecord
+from models.school_models import ScoreRecord, Schedule
 from app import db
 
 
@@ -30,6 +30,7 @@ class ScoreRecordHandler:
 
     @classmethod
     def add_info(cls, score, schedule_id):
+        schedule_id = db.session.query(Schedule).filter(Schedule.id == schedule_id).first()
         if not schedule_id:
             raise ValueError('Schedule id not exist')
         info = ScoreRecord(
@@ -42,6 +43,7 @@ class ScoreRecordHandler:
 
     @classmethod
     def del_info(cls, schedule_id):
+        schedule_id = db.session.query(Schedule).filter(Schedule.id == schedule_id).first()
         if not schedule_id:
             raise ValueError('Schedule id not exist')
         info = db.session.query(ScoreRecord).filter(ScoreRecord.schedule_id == schedule_id).first()
@@ -53,6 +55,7 @@ class ScoreRecordHandler:
 
     @classmethod
     def update_info(cls, schedule_id, score):
+        schedule_id = db.session.query(Schedule).filter(Schedule.id == schedule_id).first()
         if not schedule_id:
             raise ValueError('Schedule id not exist')
         info = db.session.query(ScoreRecord).filter(ScoreRecord.schedule_id == schedule_id).first()
