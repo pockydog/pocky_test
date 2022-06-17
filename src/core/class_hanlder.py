@@ -70,4 +70,3 @@ class ClassHandler:
         db.session.commit()
         return results
 
-

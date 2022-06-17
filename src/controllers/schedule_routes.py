@@ -51,3 +51,4 @@ def update_schedule_info(payload):
     class_id = payload['class_id']
     results = ScheduleHanlder.update_info(student_id=student_id, class_id=class_id)
     return jsonify(results=results)
+

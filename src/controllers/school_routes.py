@@ -54,3 +54,4 @@ def update_info(payload):
     results = SchoolHandler.update_info(student_name=request.args.get('name'),
                                         phone_number=payload['phone_number'])
     return jsonify(results=results)
+

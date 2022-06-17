@@ -53,3 +53,4 @@ def update_classroom_info():
     location = payload['location']
     results = ClassroomHanlder.update_info(classroom_id=classroom_id, name=name, location=location)
     return jsonify(results=results)
+

@@ -52,3 +52,4 @@ def update_class_info(payload):
     course_id = request.args.get('course_id')
     results = ClassHandler.update_info(teacher_id=teacher_id, course_id=course_id)
     return jsonify(results=results)
+

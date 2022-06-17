@@ -73,3 +73,4 @@ class EmergencyHandler:
         }
         db.session.commit()
         return results
+

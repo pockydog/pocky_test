@@ -52,3 +52,4 @@ def update_score_info(payload):
     score = payload['score']
     results = ScoreRecordHandler.update_info(schedule_id=schedule_id, score=score)
     return jsonify(results=results)
+
