@@ -57,3 +57,4 @@ def update_teacher_info(payload):
                                          gender=gender,
                                          name=name)
     return jsonify(results=results)
+

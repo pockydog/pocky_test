@@ -3,7 +3,6 @@ import requests
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 from app import db
-from models.models import TestInfo
 
 
 class BigbasketExecuter:
@@ -18,7 +17,6 @@ class BigbasketExecuter:
     _HEADERS = {
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36'
     }
-
     _DOMAIN = 'https://www.bigbasket.com'
 
     def __init__(self):
@@ -67,7 +65,4 @@ class BigbasketExecuter:
             )
             db.session.add(into)
         db.session.commit()
-
-
-
 

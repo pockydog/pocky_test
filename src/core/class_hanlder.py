@@ -56,7 +56,7 @@ class ClassHandler:
     @classmethod
     def update_info(cls, teacher_id, course_id):
         if not course_id:
-            raise ValueError('Course id not found')
+            raise ValueError('Course id not exist')
         course = db.session.query(Class).filter(Class.course_id == course_id).first()
         if not course:
             raise ValueError('Course id not found')
@@ -69,4 +69,5 @@ class ClassHandler:
         }
         db.session.commit()
         return results
+
 
