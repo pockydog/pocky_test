@@ -45,27 +45,27 @@ class ClassHandler:
     @classmethod
     def del_info(cls, class_id):
         if not class_id:
-            raise ValueError('data not found')
-        info = db.session.query(Class).filter(Class.id == class_id).first()
-        if not info:
             raise ValueError('Class id not exist')
-        db.session.delete(info)
+        class_id = db.session.query(Class).filter(Class.id == class_id).first()
+        if not class_id:
+            raise ValueError('Class id not found')
+        db.session.delete(class_id)
         db.session.commit()
         return {'success': True}
 
     @classmethod
     def update_info(cls, teacher_id, course_id):
         if not course_id:
-            raise ValueError('data not found')
-        user = db.session.query(Class).filter(Class.course_id == course_id).first()
-        if not user:
             raise ValueError('Course id not found')
-        user.teacher_id = teacher_id
-        db.session.add(user)
+        course = db.session.query(Class).filter(Class.course_id == course_id).first()
+        if not course:
+            raise ValueError('Course id not found')
+        course.teacher_id = teacher_id
+        db.session.add(course)
         results = {
-            'id': user.id,
-            'teacher_id': user.teacher_id,
-            'course_id': user.course_id,
+            'id': course.id,
+            'teacher_id': course.teacher_id,
+            'course_id': course.course_id,
         }
         db.session.commit()
         return results

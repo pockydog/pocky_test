@@ -44,10 +44,10 @@ class TeacherHanlder:
     @classmethod
     def delete_info(cls, name):
         if not name:
-            raise ValueError('data not found')
+            raise ValueError('Teacher name not exist')
         user = db.session.query(Teacher).filter(Teacher.name == name).first()
         if not user:
-            raise ValueError('User not exist')
+            raise ValueError('User not found')
         db.session.delete(user)
         db.session.commit()
         return {'success': True}
@@ -55,10 +55,10 @@ class TeacherHanlder:
     @classmethod
     def update_info(cls, name, phone_number, gender):
         if not name:
-            raise ValueError('data not found')
+            raise ValueError('Teacher name not exist')
         user = db.session.query(Teacher).filter(Teacher.name == name).first()
         if not user:
-            raise ValueError('Teacher name not exist')
+            raise ValueError('user not found')
         user.phone_number = phone_number
         user.gender = gender
         db.session.add(user)

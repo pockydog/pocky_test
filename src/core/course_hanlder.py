@@ -46,29 +46,29 @@ class CourseHanlder:
     @classmethod
     def del_info(cls, name):
         if not name:
-            raise ValueError('data not found')
-        info = db.session.query(Course).filter(Course.name == name).first()
-        if not info:
             raise ValueError('Name not exist')
-        db.session.delete(info)
+        user = db.session.query(Course).filter(Course.name == name).first()
+        if not user:
+            raise ValueError('user not found')
+        db.session.delete(user)
         db.session.commit()
         return {'success': True}
 
     @classmethod
     def update_info(cls, name, classroom_id, is_active, open_time):
         if not name:
-            raise ValueError('data not found')
-        info = db.session.query(Course).filter(Course.name == name).first()
-        if not info:
             raise ValueError('Name not exist')
+        user = db.session.query(Course).filter(Course.name == name).first()
+        if not user:
+            raise ValueError('user not found')
         Course.classroom_id = classroom_id
         Course.is_active = is_active
         Course.open_time = open_time
-        db.session.add(info)
+        db.session.add(user)
         results = {
-            'name': info.name,
-            'gender': info.gender,
-            'phone_number': info.phone_number,
+            'name': user.name,
+            'gender': user.gender,
+            'phone_number': user.phone_number,
         }
         db.session.commit()
         return results

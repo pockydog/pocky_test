@@ -42,27 +42,27 @@ class ClassroomHanlder:
     @classmethod
     def del_info(cls, id_):
         if not id_:
-            raise ValueError('data not found')
-        info = db.session.query(Classroom).filter(Classroom.id == id_).first()
-        if not id_:
             raise ValueError('Classroom id not exist')
-        db.session.delete(info)
+        classrooｍ = db.session.query(Classroom).filter(Classroom.id == id_).first()
+        if not classrooｍ:
+            raise ValueError('Classroom id not found')
+        db.session.delete(classrooｍ)
         db.session.commit()
         return {'success': True}
 
     @classmethod
     def update_info(cls, classroom_id, name, location):
         if not classroom_id:
-            raise ValueError('data not found')
-        info = db.session.query(Classroom).filter(Classroom.id == classroom_id).first()
-        if not id_:
             raise ValueError('Classroom id not exist')
-        info.location = location
-        info.name = name
-        db.session.add(info)
+        classroom = db.session.query(Classroom).filter(Classroom.id == classroom_id).first()
+        if not classroom:
+            raise ValueError('classroom id not found')
+        classroom.location = location
+        classroom.name = name
+        db.session.add(classroom)
         results = {
-            'name': info.name,
-            'location': info.location,
+            'name': classroom.name,
+            'location': classroom.location,
         }
         db.session.commit()
         return results

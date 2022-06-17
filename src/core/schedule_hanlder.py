@@ -45,10 +45,10 @@ class ScheduleHanlder:
     @classmethod
     def del_info(cls, class_id):
         if not class_id:
-            raise ValueError('data not found')
+            raise ValueError('Class id not exist')
         schedule = db.session.query(Schedule).filter(Schedule.class_id == class_id).first()
         if not schedule:
-            raise ValueError('Class id not found')
+            raise ValueError('class id not found')
         db.session.delete(schedule)
         db.session.commit()
         return {'success': True}
@@ -56,10 +56,10 @@ class ScheduleHanlder:
     @classmethod
     def update_info(cls, student_id, class_id):
         if not student_id:
-            raise ValueError('data not found')
+            raise ValueError('Student id not exist')
         schedule = db.session.query(Schedule).filter(Schedule.student_id == student_id).first()
         if not schedule:
-            raise ValueError('Student id not exist')
+            raise ValueError('student id not found')
         Schedule.class_id = class_id
         db.session.add(schedule)
         results = {

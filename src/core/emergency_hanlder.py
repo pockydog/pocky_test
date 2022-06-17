@@ -46,10 +46,10 @@ class EmergencyHandler:
     @classmethod
     def delete_info(cls, student_id):
         if not student_id:
-            raise ValueError('data not found')
+            raise ValueError('Student Id not exist')
         emergency = db.session.query(EmergencyContact).filter(EmergencyContact.student_id == student_id).first()
         if not student_id:
-            raise ValueError('Student id not exist')
+            raise ValueError('student id not found')
         db.session.delete(emergency)
         db.session.commit()
         return {'success': True}
@@ -57,10 +57,10 @@ class EmergencyHandler:
     @classmethod
     def update_info(cls, name, phone_number, relationship):
         if not name:
-            raise ValueError('data not found')
+            raise ValueError('Name is not exist')
         user = db.session.query(EmergencyContact).filter(EmergencyContact.name == name).first()
         if not user:
-            raise ValueError('name not exist')
+            raise ValueError('useer not found')
         user.phone_number = phone_number
         user.relationship_to_client = relationship
         db.session.add(user)
