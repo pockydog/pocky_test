@@ -1,4 +1,5 @@
 class Page:
-    page = 10
-    per_page = 2
+    PAGE = 5
+    PER_PAGE = 5
+
 
