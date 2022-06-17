@@ -13,7 +13,7 @@ def get_classroom_info(page=1):
     """
     名稱查詢資料
     """
-    per_page = request.args.get('per_page', Page.per_page, int)
+    per_page = request.args.get('per_page', Page.PER_PAGE, int)
     name = request.args.get('name')
     result, pagers = ClassroomHanlder.get_info(name=name, per_page=per_page, page=page)
     return jsonify(result=result, pagers=pagers)

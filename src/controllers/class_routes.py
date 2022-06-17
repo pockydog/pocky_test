@@ -14,7 +14,7 @@ def get_class_info(page=1):
     名稱查詢單筆資料
     """
     teacher_id = request.args.get('teacher_id')
-    per_page = request.args.get('per_page', Page.per_page, int)
+    per_page = request.args.get('per_page', Page.PER_PAGE, int)
     results, pager = ClassHandler.get_info(teacher_id=teacher_id, page=page, per_page=per_page)
     return jsonify(results=results, pager=pager)
 

@@ -14,7 +14,7 @@ def get_emergency_info(page=1):
     名稱查詢單筆資料
     """
     student_id = request.args.get('student_id')
-    per_page = request.args.get('per_page', Page.page, int)
+    per_page = request.args.get('per_page', Page.PER_PAGE, int)
     results, pagers = EmergencyHandler.get_info(student_id=student_id, page=page, per_page=per_page)
     return jsonify(results=results, pagers=pagers)
 

@@ -29,7 +29,7 @@ def get_course_info(page=1):
     名稱查詢單筆資料
     """
     is_active = request.args.get('is_active')
-    per_page = request.args.get('per_page', Page.page, int)
+    per_page = request.args.get('per_page', Page.PER_PAGE, int)
     results, pagers = CourseHanlder.get_info(is_active=is_active, page=page, per_page=per_page)
     return jsonify(results=results, pager=pagers)
 

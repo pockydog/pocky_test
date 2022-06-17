@@ -14,7 +14,7 @@ def get_score_student(page=1):
     名稱查詢單筆資料
     """
     schedule_id = request.args.get('schedule_id')
-    per_page = request.args.get('per_page', Page.page, int)
+    per_page = request.args.get('per_page', Page.PER_PAGE, int)
     results, pagers = ScoreRecordHandler.get_info(schedule_id=schedule_id, page=page, per_page=per_page)
     return jsonify(results=results, pagers=pagers)
 
