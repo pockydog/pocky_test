@@ -40,8 +40,12 @@ class ScoreRecordHandler:
             schedule_id=schedule_id,
             )
         db.session.add(info)
+        result = {
+            'score': info.score,
+            'schedule_id': info.schedule_id,
+        }
         db.session.commit()
-        return {'success': True}
+        return result
 
     @classmethod
     def del_info(cls, id_):

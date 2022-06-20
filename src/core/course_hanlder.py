@@ -43,7 +43,14 @@ class CourseHanlder:
                       )
         db.session.add(info)
         db.session.commit()
-        return {'success': True}
+        result = {
+            'name': info.name,
+            'classroom_id': info.classroom_id,
+            'is_active': info.is_active,
+            'open_time': info.open_time.strftime("%Y-%m-%d %H:%M"),
+
+        }
+        return result
 
     @classmethod
     def del_info(cls, name):

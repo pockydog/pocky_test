@@ -36,15 +36,24 @@ class SchoolHandler:
     def add_info(cls, name, gender, grade, phone_number):
         if not isinstance(name, str) and isinstance(gender, int) and isinstance(grade, int) and isinstance(phone_number, int):
             raise ValueError('Wrong format')
-        student = Student(
+        user = Student(
             name=name,
             gender=gender,
             grade=grade,
             phone_number=phone_number,
         )
-        db.session.add(student)
+        db.session.add(user)
         db.session.commit()
-        return {'success': True}
+        result = {
+            'id': user.id,
+            'name': user.name,
+            'gender': user.gender,
+            'grade': user.grade,
+            'phone_number': user.phone_number,
+            'create_datetime': user.create_datetime.strftime("%Y-%m-%d %H:%M:%S"),
+            'update_datetime': user.update_datetime.strftime("%Y-%m-%d %H:%M:%S"),
+        }
+        return result
 
     @classmethod
     def delete_info(cls, student_name):

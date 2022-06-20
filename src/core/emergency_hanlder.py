@@ -44,7 +44,14 @@ class EmergencyHandler:
         )
         db.session.add(emergency)
         db.session.commit()
-        return {'success': True}
+        result = {
+            'id': emergency.id,
+            'student_id': emergency.student_id,
+            'name': emergency.name,
+            'relationship_to_client': emergency.relationship_to_client,
+            'phone_number': emergency.phone_number,
+        }
+        return result
 
     @classmethod
     def delete_info(cls, student_id):

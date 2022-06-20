@@ -37,7 +37,11 @@ class ClassroomHanlder:
         )
         db.session.add(info)
         db.session.commit()
-        return {'success': True}
+        result = {
+            'name': info.name,
+            'location': info.location,
+        }
+        return result
 
     @classmethod
     def del_info(cls, id_):

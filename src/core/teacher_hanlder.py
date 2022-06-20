@@ -68,6 +68,5 @@ class TeacherHanlder:
             'phone_number': user.phone_number,
         }
         db.session.commit()
-
         return results
 

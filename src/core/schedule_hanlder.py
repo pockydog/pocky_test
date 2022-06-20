@@ -44,7 +44,12 @@ class ScheduleHanlder:
         )
         db.session.add(schedule)
         db.session.commit()
-        return {'success': True}
+        result = {
+            'id': schedule.id,
+            'class_id': schedule.class_is,
+            'student_id': schedule.student_id,
+        }
+        return result
 
     @classmethod
     def del_info(cls, class_id):
