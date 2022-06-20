@@ -60,11 +60,11 @@ class ClassHandler:
     @classmethod
     def add_info(cls, teacher_id, course_id):
         if not isinstance(teacher_id, int) and not isinstance(course_id, int):
-            raise ValueError('wrong format')
+            raise ValueError('Wrong format')
         teacher = db.session.query(Teacher).filter(Teacher.id == teacher_id).first()
-        course = db.session.query(Course).filter(Course.id == course_id).first()
         if not teacher:
             raise ValueError('teacher not found')
+        course = db.session.query(Course).filter(Course.id == course_id).first()
         if not course:
             raise ValueError('course not found')
         class_ = Class(

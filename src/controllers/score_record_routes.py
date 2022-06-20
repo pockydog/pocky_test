@@ -37,8 +37,8 @@ def del_score_info():
     """
     移除資料
     """
-    schedule_id = request.args.get('schedule_id')
-    results = ScoreRecordHandler.del_info(schedule_id=schedule_id)
+    id_ = request.args.get('id')
+    results = ScoreRecordHandler.del_info(id_=id_)
     return jsonify(results=results)
 
 

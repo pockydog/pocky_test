@@ -22,7 +22,7 @@ def get_teacher_info(page=1):
 
 @app.route('/teacher', methods=['POST'])
 @PayloadUtils.inspect_schema(Schema.TEACHERINFO)
-def create_teacher_info(payload):
+def add_teacher_info(payload):
     """
     建立老師資料
     """

@@ -31,9 +31,11 @@ class CourseHanlder:
 
     @classmethod
     def add_info(cls, name, classroom_id, is_active, open_time):
-        classroom_id = db.session.query(Classroom).filter(Classroom.id == classroom_id).first()
-        if not classroom_id:
-            raise ValueError('Classroom id not exist')
+        if not isinstance(classroom_id, int):
+            raise ValueError('Classroom Id wrong format')
+        classroom = db.session.query(Classroom).filter(Classroom.id == classroom_id).first()
+        if not classroom:
+            raise ValueError('Classroom Id not exist')
         info = Course(name=name,
                       classroom_id=classroom_id,
                       is_active=is_active,

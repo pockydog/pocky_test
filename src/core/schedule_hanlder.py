@@ -30,11 +30,13 @@ class ScheduleHanlder:
 
     @classmethod
     def add_info(cls, student_id, class_id):
-        student_id = db.session.query(Student.id == student_id).first()
-        class_id = db.session.query(Class.id == class_id).first()
-        if not student_id:
+        if not isinstance(student_id, int) and isinstance(class_id, int):
+            raise ValueError('Wrong format')
+        student = db.session.query(Student).filter(Student.id == student_id).first()
+        if not student:
             raise ValueError('Student id not found')
-        if not class_id:
+        class_ = db.session.query(Class).filter(Class.id == class_id).first()
+        if not class_:
             raise ValueError('Class id not found')
         schedule = Schedule(
             student_id=student_id,

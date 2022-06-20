@@ -30,9 +30,11 @@ class ScoreRecordHandler:
 
     @classmethod
     def add_info(cls, score, schedule_id):
-        schedule_id = db.session.query(Schedule).filter(Schedule.id == schedule_id).first()
-        if not schedule_id:
-            raise ValueError('Schedule id not exist')
+        if not isinstance(schedule_id, int):
+            raise ValueError('Schedule Id wrong format')
+        schedule = db.session.query(Schedule).filter(Schedule.id == schedule_id).first()
+        if not schedule:
+            raise ValueError('Schedule Id not exist')
         info = ScoreRecord(
             score=score,
             schedule_id=schedule_id,
@@ -42,22 +44,25 @@ class ScoreRecordHandler:
         return {'success': True}
 
     @classmethod
-    def del_info(cls, schedule_id):
-        schedule_id = db.session.query(Schedule).filter(Schedule.id == schedule_id).first()
-        if not schedule_id:
-            raise ValueError('Schedule id not exist')
-        info = db.session.query(ScoreRecord).filter(ScoreRecord.schedule_id == schedule_id).first()
+    def del_info(cls, id_):
+        condition = list()
+        if id_:
+            condition.append(
+                ScoreRecord.id == id_
+            )
+        info = db.session.query(ScoreRecord).filter(
+            *condition
+        ).first()
         if not info:
-            raise ValueError('schedule id not found')
+            raise ValueError('Id not found')
         db.session.delete(info)
         db.session.commit()
         return {'success': True}
 
     @classmethod
     def update_info(cls, schedule_id, score):
-        schedule_id = db.session.query(Schedule).filter(Schedule.id == schedule_id).first()
         if not schedule_id:
-            raise ValueError('Schedule id not exist')
+            raise ValueError('schedule id not found')
         info = db.session.query(ScoreRecord).filter(ScoreRecord.schedule_id == schedule_id).first()
         if not info:
             raise ValueError('schedule id not found')

@@ -31,8 +31,10 @@ class EmergencyHandler:
 
     @classmethod
     def add_info(cls, name, student_id, relationship_to_client, phone_number):
-        student_id = db.session.query(Student).filter(Student.id == student_id).first()
-        if not student_id:
+        if not isinstance(student_id, int):
+            raise ValueError('Student id wrong format')
+        student = db.session.query(Student).filter(Student.id == student_id).first()
+        if not student:
             raise ValueError('Student id not exist')
         emergency = EmergencyContact(
             name=name,
@@ -49,7 +51,7 @@ class EmergencyHandler:
         if not student_id:
             raise ValueError('Student Id not exist')
         emergency = db.session.query(EmergencyContact).filter(EmergencyContact.student_id == student_id).first()
-        if not student_id:
+        if not emergency:
             raise ValueError('student id not found')
         db.session.delete(emergency)
         db.session.commit()
@@ -61,7 +63,7 @@ class EmergencyHandler:
             raise ValueError('Name is not exist')
         user = db.session.query(EmergencyContact).filter(EmergencyContact.name == name).first()
         if not user:
-            raise ValueError('useer not found')
+            raise ValueError('user not found')
         user.phone_number = phone_number
         user.relationship_to_client = relationship
         db.session.add(user)
