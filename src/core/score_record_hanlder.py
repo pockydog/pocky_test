@@ -56,7 +56,7 @@ class ScoreRecordHandler:
             )
         info = db.session.query(ScoreRecord).filter(
             *condition
-        ).first()
+        ).all()
         if not info:
             raise ValueError('Id not found')
         db.session.delete(info)
