@@ -1,6 +1,4 @@
-from schema import Schema, Or, And
-# from utils.schema import SchoolSchema
-
+from schema import Schema, Or
 
 class Schema:
     INFO = Schema({

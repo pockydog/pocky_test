@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from models.school_models import Course, Classroom
 from app import db
 
@@ -48,7 +50,7 @@ class CourseHanlder:
             'name': info.name,
             'classroom_id': info.classroom_id,
             'is_active': info.is_active,
-            'open_time': info.open_time.strftime("%Y-%m-%d %H:%M"),
+            'open_time': datetime.date(info.open_time).strftime("%A") + info.open_time.strftime(" %H:%M"),
 
         }
         return result

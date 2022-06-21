@@ -72,10 +72,10 @@ class SchoolHandler:
     @classmethod
     def update_info(cls, student_name, phone_number):
         if not student_name:
-            raise ValueError('Student name not exist')
+            raise ValueError('Student name wrong format')
         user = db.session.query(Student).filter(Student.name == student_name).first()
         if not user:
-            raise ValueError('Student name not exist')
+            raise ValueError('Student name not found')
         user.phone_number = phone_number
         db.session.add(user)
         results = {

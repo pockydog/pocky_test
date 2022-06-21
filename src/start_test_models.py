@@ -6,7 +6,7 @@ from core.teacher_hanlder import TeacherHanlder
 
 
 if __name__ == '__main__':
-    TestInfo.del_info()
+    TestInfo.add_info()
     # SchoolHandler.delete_info()
 
 
