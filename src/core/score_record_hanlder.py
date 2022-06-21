@@ -32,7 +32,9 @@ class ScoreRecordHandler:
     def add_info(cls, score, schedule_id):
         if not isinstance(schedule_id, int):
             raise ValueError('Schedule Id wrong format')
-        schedule = db.session.query(Schedule).filter(Schedule.id == schedule_id).first()
+        schedule = db.session.query(Schedule).filter(
+            Schedule.id == schedule_id
+        ).first()
         if not schedule:
             raise ValueError('Schedule Id not exist')
         info = ScoreRecord(
@@ -74,6 +76,7 @@ class ScoreRecordHandler:
         ScoreRecord.schedule_id = schedule_id
         db.session.add(info)
         result = {
+            'id': info.id,
             'score': info.score,
             'schedule_id': info.schedule_id,
         }

@@ -36,8 +36,8 @@ def delete_schedule_info():
     """
     移除資料
     """
-    class_id = request.args.get('class_id')
-    results = ScheduleHanlder.del_info(class_id=class_id)
+    schedule_id = request.args.get('schedule_id')
+    results = ScheduleHanlder.del_info(schedule_id=schedule_id)
     return jsonify(results=results)
 
 

@@ -1,4 +1,4 @@
-from models.school_models import Teacher
+from models.school_models import Teacher, Class
 from app import db
 
 
@@ -42,13 +42,18 @@ class TeacherHanlder:
         return {'success': True}
 
     @classmethod
-    def delete_info(cls, name):
-        if not name:
-            raise ValueError('Teacher name not exist')
-        user = db.session.query(Teacher).filter(Teacher.name == name).first()
-        if not user:
+    def delete_info(cls, teacher_id):
+        if not teacher_id:
+            raise ValueError('Teacher id not exist')
+        classes_ = db.session.query(Class).filter(Class.teacher_id == teacher_id).all()
+        if not classes_:
+            raise ValueError('Class id not found')
+        for class_ in classes_:
+            db.session.delete(class_)
+        teacher = db.session.query(Teacher).filter(Teacher.id == teacher_id).first()
+        if not teacher:
             raise ValueError('User not found')
-        db.session.delete(user)
+        db.session.delete(teacher)
         db.session.commit()
         return {'success': True}
 
@@ -62,11 +67,12 @@ class TeacherHanlder:
         user.phone_number = phone_number
         user.gender = gender
         db.session.add(user)
-        results = {
+        result = {
+            'id': user.id,
             'name': user.name,
             'gender': user.gender,
             'phone_number': user.phone_number,
         }
         db.session.commit()
-        return results
+        return result
 

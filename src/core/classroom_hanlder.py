@@ -1,4 +1,4 @@
-from models.school_models import Classroom
+from models.school_models import Classroom, Course
 from app import db
 
 
@@ -38,19 +38,25 @@ class ClassroomHanlder:
         db.session.add(info)
         db.session.commit()
         result = {
+            'id': info.id,
             'name': info.name,
             'location': info.location,
         }
         return result
 
     @classmethod
-    def del_info(cls, id_):
-        if not isinstance(id_, int):
+    def del_info(cls, classroom_id):
+        if not classroom_id:
             raise ValueError('Classroom id wrong format')
-        classrooｍ_id = db.session.query(Classroom).filter(Classroom.id == id_).first()
-        if not classrooｍ_id:
+        courses = db.session.query(Course).filter(Course.classroom_id == classroom_id).all()
+        if not courses:
+            raise ValueError('Course id not found')
+        for course in courses:
+            db.session.delete(course)
+        classroom = db.session.query(Classroom).filter(Classroom.id == classroom_id).first()
+        db.session.delete(classroom)
+        if not classroom:
             raise ValueError('Classroom id not found')
-        db.session.delete(classrooｍ_id)
         db.session.commit()
         return {'success': True}
 

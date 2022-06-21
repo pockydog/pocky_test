@@ -40,8 +40,8 @@ def delete_info():
     """
     移除學生資料
     """
-    name = request.args.get('name')
-    results = SchoolHandler.delete_info(student_name=name)
+    student_id = request.args.get('student_id')
+    results = SchoolHandler.delete_info(student_id=student_id)
     return jsonify(results=results)
 
 

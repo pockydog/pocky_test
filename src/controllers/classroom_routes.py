@@ -37,8 +37,8 @@ def del_classroom_info():
     """
     移除資料
     """
-    id_ = request.args.get('id')
-    results = ClassroomHanlder.del_info(id_=id_)
+    classroom_id = request.args.get('id')
+    results = ClassroomHanlder.del_info(classroom_id=classroom_id)
     return jsonify(results=results)
 
 

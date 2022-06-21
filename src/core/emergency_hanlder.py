@@ -43,7 +43,6 @@ class EmergencyHandler:
             phone_number=phone_number,
         )
         db.session.add(emergency)
-        db.session.commit()
         result = {
             'id': emergency.id,
             'student_id': emergency.student_id,
@@ -51,6 +50,8 @@ class EmergencyHandler:
             'relationship_to_client': emergency.relationship_to_client,
             'phone_number': emergency.phone_number,
         }
+        db.session.commit()
+
         return result
 
     @classmethod

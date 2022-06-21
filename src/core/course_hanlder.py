@@ -44,6 +44,7 @@ class CourseHanlder:
         db.session.add(info)
         db.session.commit()
         result = {
+            'id': info.id,
             'name': info.name,
             'classroom_id': info.classroom_id,
             'is_active': info.is_active,
@@ -53,13 +54,16 @@ class CourseHanlder:
         return result
 
     @classmethod
-    def del_info(cls, name):
-        if not name:
-            raise ValueError('Name not exist')
-        user = db.session.query(Course).filter(Course.name == name).first()
-        if not user:
-            raise ValueError('user not found')
-        db.session.delete(user)
+    def del_info(cls, classroom_id):
+        if not classroom_id:
+            raise ValueError('Classroom id wrong format')
+        courses = db.session.query(Course).filter(Course.classroom_id == classroom_id).all()
+        if not courses:
+            raise ValueError('Classroom id not found')
+        for course in courses:
+            db.session.delete(course)
+        classroom = db.session.query(Classroom).filter(Classroom.id == classroom_id).first()
+        db.session.delete(classroom)
         db.session.commit()
         return {'success': True}
 

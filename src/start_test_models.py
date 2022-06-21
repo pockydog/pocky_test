@@ -1,12 +1,14 @@
 from models.models import *
-from test.class_test import TestInfo
-# from core.class_hanlder import ClassHandler
+# from test.student_test import GETINFO
+from test.course_test import TestInfo
+from core.school_hanlder import SchoolHandler
+from core.teacher_hanlder import TeacherHanlder
 
 
-if __name__ in '__main__':
-    # ClassHandler.add_info()
-    # GETINFO.get_info()
-    TestInfo.update_info()
+if __name__ == '__main__':
+    TestInfo.del_info()
+    # SchoolHandler.delete_info()
+
 
 
 

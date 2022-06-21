@@ -39,8 +39,8 @@ def delete_teacher_info():
     """
     移除老師資料
     """
-    name = request.args.get('name')
-    results = TeacherHanlder.delete_info(name=name)
+    teacher_id = request.args.get('teacher_id')
+    results = TeacherHanlder.delete_info(teacher_id=teacher_id)
     return jsonify(results=results)
 
 

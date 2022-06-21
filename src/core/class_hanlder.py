@@ -33,10 +33,10 @@ class ClassHandler:
     def del_info(cls, class_id):
         if not class_id:
             raise ValueError('Class id not exist')
-        class_id = db.session.query(Class).filter(Class.id == class_id).first()
-        if not class_id:
+        class_ = db.session.query(Class).filter(Class.id == class_id).first()
+        if not class_:
             raise ValueError('Class id not found')
-        db.session.delete(class_id)
+        db.session.delete(class_)
         db.session.commit()
         return {'success': True}
 

@@ -39,7 +39,7 @@ def del_course_info():
     """
     移除資料
     """
-    name = request.args.get('name')
-    results = CourseHanlder.del_info(name=name)
+    classroom_id = request.args.get('classroom_id')
+    results = CourseHanlder.del_info(classroom_id=classroom_id)
     return jsonify(results=results)
 

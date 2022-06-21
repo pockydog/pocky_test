@@ -1,4 +1,4 @@
-from models.school_models import Schedule, Student, Class
+from models.school_models import Schedule, Student, Class, ScoreRecord
 from app import db
 
 
@@ -52,12 +52,17 @@ class ScheduleHanlder:
         return result
 
     @classmethod
-    def del_info(cls, class_id):
-        if not class_id:
+    def del_info(cls, schedule_id):
+        if not schedule_id:
             raise ValueError('Class id not exist')
-        schedule = db.session.query(Schedule).filter(Schedule.class_id == class_id).first()
+        classes = db.session.query(ScoreRecord).filter(ScoreRecord.schedule_id == schedule_id).all()
+        if not classes:
+            raise ValueError('Schedule id not found')
+        for class_ in classes:
+            db.session.delete(class_)
+        schedule = db.session.query(Schedule).filter(Schedule.id == schedule_id).first()
         if not schedule:
-            raise ValueError('class id not found')
+            raise ValueError('Schedule id not found')
         db.session.delete(schedule)
         db.session.commit()
         return {'success': True}
