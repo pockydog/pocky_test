@@ -49,14 +49,12 @@ class ClassroomHanlder:
         if not classroom_id:
             raise ValueError('Classroom id wrong format')
         courses = db.session.query(Course).filter(Course.classroom_id == classroom_id).all()
-        if not courses:
-            raise ValueError('Course id not found')
         for course in courses:
             db.session.delete(course)
         classroom = db.session.query(Classroom).filter(Classroom.id == classroom_id).first()
-        db.session.delete(classroom)
         if not classroom:
             raise ValueError('Classroom id not found')
+        db.session.delete(classroom)
         db.session.commit()
         return {'success': True}
 

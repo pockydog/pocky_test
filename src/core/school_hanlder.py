@@ -57,9 +57,9 @@ class SchoolHandler:
 
     @classmethod
     def delete_info(cls, student_id):
+        if not isinstance(student_id, int):
+            raise ValueError('Student Id wrong format')
         emergencys = db.session.query(EmergencyContact).filter(EmergencyContact.student_id == student_id).all()
-        if not emergencys:
-            raise ValueError('student_id not found')
         for emergency in emergencys:
             db.session.delete(emergency)
         student = db.session.query(Student).filter(Student.id == student_id).first()

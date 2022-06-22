@@ -56,8 +56,6 @@ class ScheduleHanlder:
         if not schedule_id:
             raise ValueError('Class id not exist')
         classes = db.session.query(ScoreRecord).filter(ScoreRecord.schedule_id == schedule_id).all()
-        if not classes:
-            raise ValueError('Schedule id not found')
         for class_ in classes:
             db.session.delete(class_)
         schedule = db.session.query(Schedule).filter(Schedule.id == schedule_id).first()

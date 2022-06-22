@@ -60,8 +60,6 @@ class CourseHanlder:
         if not classroom_id:
             raise ValueError('Classroom id wrong format')
         courses = db.session.query(Course).filter(Course.classroom_id == classroom_id).all()
-        if not courses:
-            raise ValueError('Classroom id not found')
         for course in courses:
             db.session.delete(course)
         classroom = db.session.query(Classroom).filter(Classroom.id == classroom_id).first()
