@@ -48,6 +48,7 @@ def update_class_info(payload):
     """
     修改資料
     """
+    test = '1'
     teacher_id = payload['teacher_id']
     course_id = request.args.get('course_id')
     results = ClassHandler.update_info(teacher_id=teacher_id, course_id=course_id)
